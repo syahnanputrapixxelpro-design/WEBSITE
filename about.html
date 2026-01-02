@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Maroon Digital</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- COLOR PALETTE --- */
+            --primary-bg: #0B1120;
+            --card-bg: #161F32;
+
+            --accent-green: #34d399;
+            --accent-teal-dark: #0f766e;
+            --accent-red: #f87171;
+            --accent-maroon: #dc2626;
+            --accent-blue: #3b82f6;
+
+            --text-heading: #ffffff;
+            --text-high-contrast: #f8fafc;
+            --text-body: #e2e8f0;
+            --text-muted: #94a3b8;
+
+            --dropdown-bg: #111827;
+            --nav-link-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: var(--text-heading);
+            font-weight: 700;
+        }
+
+        /* --- NAVBAR STYLES --- */
+        .navbar {
+            background-color: rgba(11, 17, 32, 0.98);
+            backdrop-filter: blur(16px);
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1030;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--text-heading) !important;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-accent {
+            color: var(--accent-maroon);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--nav-link-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.8rem 1.2rem !important;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active,
+        .navbar-nav .show>.nav-link {
+            color: #ffffff;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .nav-link i.fa-chevron-down {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item.dropdown:hover .nav-link i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .btn-nav-login {
+            color: var(--text-heading);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        @media (min-width: 992px) {
+            .btn-nav-login {
+                margin-top: 0;
+            }
+        }
+
+        .btn-nav-login:hover {
+            background-color: var(--text-heading);
+            color: var(--primary-bg);
+        }
+
+        /* --- MEGA MENU --- */
+        .dropdown-menu.mega-menu {
+            background-color: var(--dropdown-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 3px solid var(--accent-maroon);
+            border-radius: 0 0 16px 16px;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item {
+                position: static;
+            }
+
+            .dropdown-menu.mega-menu {
+                display: block;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateY(15px);
+                transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                width: 100%;
+                left: 0;
+                right: 0;
+                top: 90%;
+                padding: 40px 0;
+                box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.7);
+            }
+
+            .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .dropdown-menu.mega-menu {
+                border-radius: 8px;
+                margin: 10px;
+            }
+
+            .menu-category-title {
+                margin-top: 20px;
+            }
+
+            .mega-link {
+                padding: 10px;
+            }
+
+            .navbar-collapse {
+                max-height: 80vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding-bottom: 20px;
+                scrollbar-width: thin;
+                scrollbar-color: var(--accent-maroon) transparent;
+            }
+        }
+
+        .mega-link {
+            display: flex;
+            align-items: start;
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-heading);
+            transition: all 0.2s ease;
+        }
+
+        .mega-link:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+            transform: translateX(5px);
+        }
+
+        .mega-icon-box {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .mega-link:hover .mega-icon-box {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .mega-link h6 {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+            color: #f1f5f9;
+        }
+
+        .mega-link p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        .menu-category-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-left: 15px;
+        }
+
+        .best-seller-box {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* --- COLORS UTILITIES --- */
+        .text-maroon {
+            color: var(--accent-maroon) !important;
+        }
+
+        .text-blue {
+            color: var(--accent-blue) !important;
+        }
+
+        .text-green {
+            color: var(--accent-green) !important;
+        }
+
+        .text-muted-custom {
+            color: var(--text-muted) !important;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .section-tag {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-maroon);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            padding: 160px 0 80px;
+            background: radial-gradient(circle at 50% -20%, rgba(220, 38, 38, 0.15) 0%, var(--primary-bg) 60%);
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stat-box.red:hover {
+            border-color: var(--accent-maroon);
+            transform: translateY(-3px);
+        }
+
+        .stat-box.blue:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        .stat-box.green:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-3px);
+        }
+
+        .stat-box h3 {
+            margin-bottom: 0.2rem;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        /* --- TIMELINE STORY (RE-DESIGNED FOR NEATNESS) --- */
+        .timeline-section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Garis Tengah */
+        .timeline-line {
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        /* Item Timeline */
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        /* Posisi Kiri & Kanan */
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        /* Titik (Node) di Tengah */
+        .timeline-node {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--primary-bg);
+            border: 3px solid;
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.right .timeline-node {
+            left: -10px;
+        }
+
+        /* Warna Node */
+        .node-green {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+        }
+
+        .node-blue {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .node-red {
+            border-color: var(--accent-maroon);
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
+        /* Card Content Timeline */
+        .story-card {
+            padding: 25px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Panah Kecil ke arah Garis */
+        .story-card::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            border: medium solid white;
+        }
+
+        .timeline-item.left .story-card::before {
+            right: -10px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--card-bg);
+        }
+
+        .timeline-item.right .story-card::before {
+            left: -10px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--card-bg) transparent transparent;
+        }
+
+        /* --- FOUNDER & VALUES --- */
+        .founder-section {
+            padding: 80px 0;
+        }
+
+        .founder-card-pro {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .founder-img-wrapper {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            position: relative;
+        }
+
+        .founder-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .founder-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quote-box {
+            background: rgba(220, 38, 38, 0.05);
+            border-left: 4px solid var(--accent-maroon);
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .quote-text {
+            font-style: italic;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .value-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem 1rem;
+            text-align: center;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-card.red:hover {
+            border-color: var(--accent-maroon);
+        }
+
+        .value-card.blue:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .value-card.green:hover {
+            border-color: var(--accent-green);
+        }
+
+        .value-card.yellow:hover {
+            border-color: #fbbf24;
+        }
+
+        .value-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- CTA SECTION (RAPID & PREMIUM) --- */
+        .cta-wrapper {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient Background yang lebih dalam */
+        .cta-card {
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Aksen Warna di belakang CTA */
+        .cta-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .glow-left {
+            background: var(--accent-maroon);
+            top: -50px;
+            left: -50px;
+        }
+
+        .glow-right {
+            background: var(--accent-blue);
+            bottom: -50px;
+            right: -50px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #020617;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1rem;
+        }
+
+        footer h5 {
+            color: var(--text-heading);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        footer a:hover {
+            color: var(--accent-red);
+            transform: translateX(5px);
+        }
+
+        /* --- RESPONSIVE FIXES (MOBILE & TABLET) --- */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 120px;
+            }
+
+            /* TIMELINE MOBILE FIX */
+            .timeline-line {
+                left: 31px;
+            }
+
+            /* Garis pindah ke kiri */
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            /* Konten full width, padding kiri besar */
+            .timeline-item.right {
+                left: 0%;
+                text-align: left;
+            }
+
+            /* Reset posisi kanan jadi kiri */
+            .timeline-item.left {
+                text-align: left;
+            }
+
+            /* Text align kiri semua */
+
+            /* Node Fix */
+            .timeline-node {
+                left: 21px !important;
+                right: auto !important;
+            }
+
+            /* Arrow Fix */
+            .story-card::before {
+                left: -10px !important;
+                border-width: 10px 10px 10px 0 !important;
+                border-color: transparent var(--card-bg) transparent transparent !important;
+                right: auto !important;
+            }
+
+            /* Founder Fix */
+            .founder-img-wrapper {
+                height: 250px;
+                min-height: auto;
+            }
+
+            .founder-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .cta-card {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="fas fa-layer-group brand-accent me-2"></i>
+                Maroon<span class="text-white fw-light ms-1">Digital</span>
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Services <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-5 mb-4 mb-lg-0">
+                                        <div class="menu-category-title">Core Services</div>
+                                        <a href="digital-marketing.html" class="mega-link">
+                                            <div class="mega-icon-box text-warning"><i class="fas fa-bullhorn"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Digital Marketing</h6>
+                                                <p>Strategi marketing terukur & profitabel.</p>
+                                            </div>
+                                        </a>
+                                        <a href="socialmedia-management.html" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-users"></i></div>
+                                            <div>
+                                                <h6>Social Media Management</h6>
+                                                <p>Konten kreatif untuk engagement tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="web-application-development.html" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-code"></i></div>
+                                            <div>
+                                                <h6>Web Application</h6>
+                                                <p>Sistem web custom untuk bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Growth</div>
+                                        <a href="jasa-pembuatan-landing-page.html" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-laptop-code"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Landing Page Service</h6>
+                                                <p>Halaman penawaran konversi tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="bisnis-consulting.html" class="mega-link">
+                                            <div class="mega-icon-box text-danger"><i class="fas fa-comments"></i></div>
+                                            <div>
+                                                <h6>Business Consulting</h6>
+                                                <p>Sesi konsultasi bedah bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 border-start border-secondary border-opacity-25 d-none d-lg-block">
+                                        <div class="best-seller-box">
+                                            <i class="fas fa-crown text-warning fa-2x mb-3"></i>
+                                            <h6 class="text-white small fw-bold">Best Seller</h6>
+                                            <p class="text-white-50 small" style="font-size: 0.8rem;">Paket Full Service
+                                                Pro paling banyak diminati.</p>
+                                            <a href="Index.html"
+                                                class="btn btn-sm btn-outline-warning rounded-pill mt-2">Lihat Paket</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="frameworkDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Marketing Framework <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="frameworkDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Fundamentals</div>
+                                        <a href="framework.html#fundamentals" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-book-open"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Overview</h6>
+                                                <p>50+ Marketing Framework.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Execution</div>
+                                        <a href="framework.html#copywriting" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-pen-nib"></i></div>
+                                            <div>
+                                                <h6>Copywriting</h6>
+                                                <p>Teknik Menulis Penawaran.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Advance</div>
+                                        <a href="framework.html#storytelling" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-theater-masks"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Storytelling</h6>
+                                                <p>Membangun Narasi Brand.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <a href="https://wa.me/62895639068080" target="_blank" class="btn btn-nav-login ms-lg-3">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container text-center">
+            <span class="section-tag">Tentang Kami</span>
+            <h1 class="display-4 fw-bold mb-3">Maroon Digital — Bridge Antara <br> <span class="text-green">Teknologi &
+                    Bisnis</span></h1>
+            <p class="text-muted-custom mx-auto mb-5" style="max-width: 700px;">
+                Mitra transformasi digital Anda. Kami menggabungkan strategi bisnis yang tajam dengan eksekusi teknologi
+                yang presisi.
+            </p>
+
+            <div class="row justify-content-center g-4">
+                <div class="col-6 col-md-4">
+                    <div class="stat-box red">
+                        <h3 class="text-maroon">10+ Tahun</h3>
+                        <div class="small text-secondary">Pengalaman</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="stat-box blue">
+                        <h3 class="text-blue">150+ Proyek</h3>
+                        <div class="small text-secondary">Selesai</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="stat-box green">
+                        <h3 class="text-green">50+ Ahli</h3>
+                        <div class="small text-secondary">Tim Developer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="section-tag">Perjalanan Kami</span>
+                <h2 class="fw-bold">Our Story</h2>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-node node-green"></div>
+                    <div class="story-card hover-green">
+                        <span class="badge bg-success bg-opacity-10 text-success mb-2 rounded-pill">2015</span>
+                        <h4 class="fw-bold">Awal Mula</h4>
+                        <p class="text-muted-custom mb-0">Dimulai dari garasi kecil dengan visi mendigitalkan UMKM lokal
+                            agar bisa bersaing di pasar global dengan teknologi.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-node node-blue"></div>
+                    <div class="story-card hover-blue">
+                        <span class="badge bg-primary bg-opacity-10 text-primary mb-2 rounded-pill">2019</span>
+                        <h4 class="fw-bold">Ekspansi Besar</h4>
+                        <p class="text-muted-custom mb-0">Membuka kantor cabang pertama di Jakarta dan mulai melayani
+                            klien korporat multinasional dari berbagai industri.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-node node-red"></div>
+                    <div class="story-card hover-red">
+                        <span class="badge bg-danger bg-opacity-10 text-danger mb-2 rounded-pill">2024</span>
+                        <h4 class="fw-bold">Inovasi AI</h4>
+                        <p class="text-muted-custom mb-0">Mengintegrasikan solusi Artificial Intelligence dan Machine
+                            Learning ke dalam setiap strategi produk digital kami.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="founder-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="section-tag">Kepemimpinan</span>
+                <h2 class="fw-bold">Meet The Founder</h2>
+            </div>
+
+            <div class="founder-card-pro">
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        <div class="founder-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Founder Maroon Digital">
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="founder-content">
+                            <h2 class="mb-1 text-white fw-bold">Rama Wijaya</h2>
+                            <p class="text-maroon fw-bold mb-3">CEO & Founder</p>
+
+                            <div class="quote-box">
+                                <p class="quote-text mb-0">
+                                    "Misi saya sederhana: Menjadikan teknologi bukan sebagai penghalang, tapi sebagai
+                                    jembatan yang menghubungkan impian bisnis dengan kenyataan."
+                                </p>
+                            </div>
+
+                            <p class="text-muted-custom mb-4">
+                                Berpengalaman lebih dari 15 tahun di industri teknologi, Rama telah memimpin tim
+                                engineering di berbagai perusahaan unicorn Asia Tenggara sebelum mendirikan Maroon
+                                Digital.
+                            </p>
+
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-secondary hover-text-white"><i
+                                        class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="#" class="text-secondary hover-text-white"><i
+                                        class="fab fa-twitter fa-lg"></i></a>
+                                <a href="#" class="text-secondary hover-text-white"><i
+                                        class="fas fa-envelope fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="text-center mb-5">
+            <span class="section-tag">Nilai Kami</span>
+            <h2 class="fw-bold">Our Core Values</h2>
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+            <div class="col">
+                <div class="value-card red">
+                    <i class="fas fa-rocket text-maroon"></i>
+                    <h5 class="fw-bold mt-3">Inovasi</h5>
+                </div>
+            </div>
+            <div class="col">
+                <div class="value-card blue">
+                    <i class="fas fa-users text-blue"></i>
+                    <h5 class="fw-bold mt-3">Kolaborasi</h5>
+                </div>
+            </div>
+            <div class="col">
+                <div class="value-card green">
+                    <i class="fas fa-shield-alt text-green"></i>
+                    <h5 class="fw-bold mt-3">Integritas</h5>
+                </div>
+            </div>
+            <div class="col">
+                <div class="value-card yellow">
+                    <i class="fas fa-bolt text-warning"></i>
+                    <h5 class="fw-bold mt-3">Kecepatan</h5>
+                </div>
+            </div>
+            <div class="col">
+                <div class="value-card red">
+                    <i class="fas fa-heart text-maroon"></i>
+                    <h5 class="fw-bold mt-3">Passion</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="text-center mb-5">
+            <span class="section-tag">Galeri</span>
+            <h2 class="fw-bold">Our Showroom</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="rounded-3 border border-secondary border-opacity-25 overflow-hidden">
+                    <div class="ratio ratio-4x3">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+                            class="object-fit-cover" alt="Office 1">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rounded-3 border border-secondary border-opacity-25 overflow-hidden">
+                    <div class="ratio ratio-4x3">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80"
+                            class="object-fit-cover" alt="Office 2">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rounded-3 border border-secondary border-opacity-25 overflow-hidden">
+                    <div class="ratio ratio-4x3">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80"
+                            class="object-fit-cover" alt="Office 3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-wrapper">
+        <div class="container">
+            <div class="cta-card mx-auto" style="max-width: 900px;">
+                <div class="cta-glow glow-left"></div>
+                <div class="cta-glow glow-right"></div>
+
+                <h2 class="text-white mb-3 fw-bold display-6 position-relative z-3">Siap Mengembangkan Bisnis Anda?</h2>
+                <p class="text-white text-opacity-75 mb-5 position-relative z-3 fs-5">
+                    Jadwalkan konsultasi gratis 30 menit untuk membedah potensi digital bisnis Anda bersama tim ahli
+                    kami.
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-column flex-sm-row position-relative z-3">
+                    <button class="btn btn-light rounded-pill px-5 py-3 fw-bold text-danger">Hubungi Kami</button>
+                    <button class="btn btn-outline-light rounded-pill px-5 py-3">Lihat Portfolio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h5 class="text-white fw-bold"><i class="fas fa-layer-group text-danger me-2"></i>Maroon Digital
+                    </h5>
+                    <p style="color: #cbd5e1; font-size: 0.95rem;">Partner strategis pertumbuhan bisnis Anda. Kami
+                        mengkombinasikan data, kreativitas, dan teknologi.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="bisnis-consulting.html">Consulting</a></li>
+                        <li><a style="color: #ffffff;" href="digital-marketing.html">Ads Management</a></li>
+                        <li><a style="color: #ffffff;" href="web-application-development.html">Web Development</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Perusahaan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="about.html">Tentang Kami</a></li>
+                        <li><a style="color: #ffffff;" href="https://wa.me/62895639068080" target="_blank">Kontak</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Hubungi Kami</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2"><i class="fas fa-envelope me-2 text-danger"></i> <span
+                                style="color: #cbd5e1;">info@maroondigital.com</span></li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i> <span
+                                style="color: #cbd5e1;">Jakarta Selatan, Indonesia</span></li>
+                    </ul>
+                    <div class="mt-4">
+                        <a href="https://www.instagram.com/" class="me-3 fs-5 text-white"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" class="me-3 fs-5 text-white"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/" class="me-3 fs-5 text-white"><i
+                                class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 pt-4 border-top border-secondary border-opacity-25">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">&copy; 2023 Maroon Digital. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

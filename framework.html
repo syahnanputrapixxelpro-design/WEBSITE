@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Frameworks Masterclass - Maroon Digital</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- COLOR PALETTE --- */
+            --primary-bg: #0B1120;
+            --card-bg: #161F32;
+            
+            /* Brand Accents */
+            --accent-maroon: #dc2626;
+            --accent-blue: #3b82f6; /* Fundamentals */
+            --accent-pink: #ec4899; /* Storytelling */
+            --accent-green: #34d399; /* Copywriting */
+            
+            /* Text Colors */
+            --text-heading: #ffffff;
+            --text-body: #e2e8f0;
+            --text-muted: #cbd5e1;
+            
+            --dropdown-bg: #111827;
+            --nav-link-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 { color: var(--text-heading); font-weight: 700; }
+        p, li { color: var(--text-body); }
+        .text-muted { color: var(--text-muted) !important; }
+        .small { font-size: 0.875rem; }
+
+        /* --- CATEGORY THEMES --- */
+        .theme-blue { color: var(--accent-blue); }
+        .border-blue:hover { border-color: var(--accent-blue) !important; }
+        .bg-blue-soft { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+        
+        .theme-pink { color: var(--accent-pink); }
+        .border-pink:hover { border-color: var(--accent-pink) !important; }
+        .bg-pink-soft { background: rgba(236, 72, 153, 0.1); color: var(--accent-pink); }
+
+        .theme-green { color: var(--accent-green); }
+        .border-green:hover { border-color: var(--accent-green) !important; }
+        .bg-green-soft { background: rgba(52, 211, 153, 0.1); color: var(--accent-green); }
+
+        /* --- NAVBAR STYLES --- */
+        .navbar { background-color: rgba(11, 17, 32, 0.98); backdrop-filter: blur(16px); padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 1030; }
+        .navbar-brand { font-weight: 700; color: var(--text-heading) !important; font-size: 1.5rem; letter-spacing: -0.5px; }
+        .brand-accent { color: var(--accent-maroon); }
+        .navbar-nav .nav-link { color: var(--nav-link-color) !important; font-weight: 500; font-size: 0.95rem; padding: 0.8rem 1.2rem !important; transition: color 0.3s; display: flex; align-items: center; gap: 6px; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active, .navbar-nav .show>.nav-link { color: #ffffff !important; }
+        .dropdown-toggle::after { display: none; }
+        .nav-link i.fa-chevron-down { font-size: 0.75rem; transition: transform 0.3s ease; }
+        .nav-item.dropdown:hover .nav-link i.fa-chevron-down { transform: rotate(180deg); }
+        .btn-nav-login { color: var(--text-heading) !important; border: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s; margin-top: 10px; }
+        @media (min-width: 992px) { .btn-nav-login { margin-top: 0; } }
+        .btn-nav-login:hover { background-color: var(--text-heading); color: var(--primary-bg) !important; }
+        @media (max-width: 991.98px) { .navbar-collapse { max-height: 80vh; overflow-y: auto; overflow-x: hidden; padding-bottom: 20px; scrollbar-width: thin; scrollbar-color: var(--accent-maroon) transparent; } }
+        
+        /* MEGA MENU */
+        .dropdown-menu.mega-menu { background-color: var(--dropdown-bg); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid var(--accent-maroon); border-radius: 0 0 16px 16px; padding: 20px; margin-top: 0; }
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item { position: static; }
+            .dropdown-menu.mega-menu { display: block; visibility: hidden; opacity: 0; transform: translateY(15px); transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); width: 100%; left: 0; right: 0; top: 90%; padding: 40px 0; box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.7); }
+            .navbar-nav .nav-item.dropdown:hover .dropdown-menu { visibility: visible; opacity: 1; transform: translateY(0); }
+        }
+        .mega-link { display: flex; align-items: start; padding: 16px; border-radius: 12px; text-decoration: none; color: var(--text-heading); transition: all 0.2s ease; }
+        .mega-link:hover { background-color: rgba(255,255,255,0.03); transform: translateX(5px); }
+        .mega-icon-box { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0; }
+        .mega-link:hover .mega-icon-box { background: rgba(255,255,255,0.1); color: white; }
+        .mega-link h6 { font-weight: 600; margin-bottom: 4px; font-size: 0.95rem; color: #f1f5f9; }
+        .mega-link p { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0; line-height: 1.4; }
+        .menu-category-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 700; margin-bottom: 15px; padding-left: 15px; }
+        .best-seller-box { height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 1.5rem; border-radius: 1rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            padding: 180px 0 100px;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05) 0%, var(--primary-bg) 60%);
+        }
+
+        /* --- STICKY SUB-NAV --- */
+        .sticky-subnav {
+            position: sticky; top: 75px; 
+            z-index: 1020;
+            background: rgba(11, 17, 32, 0.98); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .nav-pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; 
+            gap: 8px; 
+        }
+        .nav-pills .nav-link {
+            color: var(--text-muted); border-radius: 50px; 
+            padding: 8px 24px;
+            font-weight: 500; font-size: 0.95rem;
+            transition: 0.3s; border: 1px solid transparent;
+        }
+        .nav-pills .nav-link:hover { color: white; background: rgba(255,255,255,0.05); }
+        .nav-pills .nav-link.active { background-color: var(--accent-maroon); color: white; border-color: var(--accent-maroon); box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3); }
+
+        /* --- SECTION HEADER --- */
+        .section-header {
+            margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; align-items: center; gap: 15px;
+        }
+        .section-icon {
+            width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;
+        }
+
+        /* --- FRAMEWORK CARD --- */
+        .framework-card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px; padding: 30px; height: 100%; transition: 0.3s;
+            position: relative; overflow: hidden; display: flex; flex-direction: column; cursor: pointer;
+        }
+        
+        .framework-card:hover { transform: translateY(-5px); }
+        
+        .fw-badge { font-size: 0.7rem; padding: 5px 12px; border-radius: 30px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; display: inline-block; }
+        .fw-title { font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 10px; }
+        .fw-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px; flex-grow: 1; line-height: 1.7; }
+        
+        .fw-btn {
+            background: transparent; border: none; padding: 0; color: inherit;
+            font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .fw-btn:hover { gap: 12px; }
+
+        /* --- MODAL STYLES (PREMIUM) --- */
+        .modal-content {
+            background-color: var(--card-bg); color: var(--text-body);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+        .modal-header { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 1.5rem 2.5rem; }
+        .modal-body { font-size: 1.05rem; line-height: 1.8; padding: 2.5rem; color: #cbd5e1; }
+        .modal-footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 1.5rem 2.5rem; }
+        .modal-title { font-weight: 800; font-size: 1.75rem; letter-spacing: -0.5px; line-height: 1.3; }
+        
+        /* --- CTA FOOTER --- */
+        .cta-footer { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); padding: 100px 0; margin-top: 100px; border-top: 1px solid rgba(255,255,255,0.05); }
+        
+        /* --- FOOTER --- */
+        footer { background-color: #020617; padding: 80px 0 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 1rem; }
+        footer h5 { color: var(--text-heading); margin-bottom: 20px; font-weight: 600; }
+        footer a { color: #cbd5e1 !important; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 12px; }
+        footer a:hover { color: var(--accent-red) !important; transform: translateX(5px); }
+
+        /* Utility for Modal Title Colors */
+        .text-accent-blue { color: var(--accent-blue) !important; text-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        .text-accent-pink { color: var(--accent-pink) !important; text-shadow: 0 0 20px rgba(236, 72, 153, 0.3); }
+        .text-accent-green { color: var(--accent-green) !important; text-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+
+
+        /* =========================================
+           MOBILE RESPONSIVE FIXES
+        ========================================= */
+        @media (max-width: 767.98px) {
+            .sticky-subnav { top: 70px; padding: 10px 0; }
+            .nav-pills { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            .nav-pills .nav-link { padding: 6px 14px; font-size: 0.8rem; width: auto; }
+
+            .modal-header { padding: 1.25rem 1.5rem; }
+            .modal-title { font-size: 1.4rem; }
+            .modal-body { padding: 1.5rem; font-size: 1rem; }
+            .modal-footer { padding: 1rem 1.5rem; }
+
+            .hero-section { padding-top: 140px; padding-bottom: 60px; }
+            .display-4 { font-size: 2.2rem; }
+            .section-header h3 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="fas fa-layer-group brand-accent me-2"></i>
+                Maroon<span class="text-white fw-light ms-1">Digital</span>
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Services <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-5 mb-4 mb-lg-0">
+                                        <div class="menu-category-title">Core Services</div>
+                                        <a href="digital-marketing.html" class="mega-link">
+                                            <div class="mega-icon-box text-warning"><i class="fas fa-bullhorn"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Digital Marketing</h6>
+                                                <p>Strategi marketing terukur & profitabel.</p>
+                                            </div>
+                                        </a>
+                                        <a href="socialmedia-management.html" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-users"></i></div>
+                                            <div>
+                                                <h6>Social Media Management</h6>
+                                                <p>Konten kreatif untuk engagement tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="web-application-development.html" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-code"></i></div>
+                                            <div>
+                                                <h6>Web Application</h6>
+                                                <p>Sistem web custom untuk bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Growth</div>
+                                        <a href="jasa-pembuatan-landing-page.html" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-laptop-code"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Landing Page Service</h6>
+                                                <p>Halaman penawaran konversi tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="bisnis-consulting.html" class="mega-link">
+                                            <div class="mega-icon-box text-danger"><i class="fas fa-comments"></i></div>
+                                            <div>
+                                                <h6>Business Consulting</h6>
+                                                <p>Sesi konsultasi bedah bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 border-start border-secondary border-opacity-25 d-none d-lg-block">
+                                        <div class="best-seller-box">
+                                            <i class="fas fa-crown text-warning fa-2x mb-3"></i>
+                                            <h6 class="text-white small fw-bold">Best Seller</h6>
+                                            <p class="text-white-50 small" style="font-size: 0.8rem;">Paket Full Service
+                                                Pro paling banyak diminati.</p>
+                                            <a href="Index.html"
+                                                class="btn btn-sm btn-outline-warning rounded-pill mt-2">Lihat Paket</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="frameworkDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Marketing Framework <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="frameworkDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Fundamentals</div>
+                                        <a href="framework.html#fundamentals" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-book-open"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Overview</h6>
+                                                <p>50+ Marketing Framework.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Execution</div>
+                                        <a href="framework.html#copywriting" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-pen-nib"></i></div>
+                                            <div>
+                                                <h6>Copywriting</h6>
+                                                <p>Teknik Menulis Penawaran.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Advance</div>
+                                        <a href="framework.html#storytelling" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-theater-masks"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Storytelling</h6>
+                                                <p>Membangun Narasi Brand.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <a href="https://wa.me/62895639068080" target="_blank" class="btn btn-nav-login ms-lg-3">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section text-center">
+        <div class="container">
+            <span class="badge bg-secondary bg-opacity-25 text-white rounded-pill px-3 py-2 mb-3">LIBRARY</span>
+            <h1 class="display-4 fw-bold mb-4">Marketing Frameworks <br> <span class="text-muted">Masterclass</span></h1>
+            <p class="text-muted mx-auto mb-0" style="max-width: 700px; font-size: 1.2rem;">
+                Koleksi lengkap metodologi strategi, narasi brand, dan teknik copywriting untuk mempercepat pertumbuhan bisnis Anda.
+            </p>
+        </div>
+    </section>
+
+    <div class="sticky-subnav">
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="#fundamentals">Fundamentals</a></li>
+                <li class="nav-item"><a class="nav-link" href="#storytelling">Storytelling</a></li>
+                <li class="nav-item"><a class="nav-link" href="#copywriting">Copywriting</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <section id="fundamentals" class="container py-5">
+        <div class="section-header">
+            <div class="section-icon bg-blue-soft"><i class="fas fa-layer-group"></i></div>
+            <h3 class="mb-0 theme-blue">Strategic Fundamentals</h3>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col">
+                <div class="framework-card border-blue" data-bs-toggle="modal" data-bs-target="#frameworkModal" 
+                     data-bs-title="SWOT Analysis" 
+                     data-bs-color="text-accent-blue"
+                     data-bs-content="<p>SWOT adalah singkatan dari Strengths (Kekuatan), Weaknesses (Kelemahan), Opportunities (Peluang), dan Threats (Ancaman). Framework ini digunakan untuk mengevaluasi posisi kompetitif perusahaan dan mengembangkan perencanaan strategis.</p><h5>Cara Menggunakan:</h5><ul><li><strong>Strengths:</strong> Apa kelebihan unik Anda?</li><li><strong>Weaknesses:</strong> Apa yang perlu diperbaiki?</li><li><strong>Opportunities:</strong> Tren apa yang bisa dimanfaatkan?</li><li><strong>Threats:</strong> Apa hambatan dari kompetitor atau regulasi?</li></ul>">
+                    <span class="fw-badge bg-blue-soft">BASIC</span>
+                    <h5 class="fw-title">SWOT Analysis</h5>
+                    <p class="fw-desc">Analisis posisi bisnis Anda melalui faktor internal (Kekuatan & Kelemahan) dan eksternal (Peluang & Ancaman).</p>
+                    <button class="fw-btn theme-blue">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="framework-card border-blue" data-bs-toggle="modal" data-bs-target="#frameworkModal"
+                     data-bs-title="STP Marketing"
+                     data-bs-color="text-accent-blue"
+                     data-bs-content="<p>STP (Segmentation, Targeting, Positioning) adalah model pemasaran yang memprioritaskan proposisi nilai kepada audiens tertentu.</p><h5>Langkah-langkah:</h5><ol><li><strong>Segmentation:</strong> Membagi pasar yang luas menjadi kelompok-kelompok kecil berdasarkan karakteristik.</li><li><strong>Targeting:</strong> Memilih satu atau lebih segmen yang paling menguntungkan untuk dilayani.</li><li><strong>Positioning:</strong> Menentukan bagaimana produk Anda ingin diingat di benak segmen tersebut.</li></ol>">
+                    <span class="fw-badge bg-blue-soft">TARGETING</span>
+                    <h5 class="fw-title">STP Marketing</h5>
+                    <p class="fw-desc">Segmentation, Targeting, Positioning. Memilih pasar yang tepat dan menanamkan persepsi brand yang kuat.</p>
+                    <button class="fw-btn theme-blue">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="framework-card border-blue" data-bs-toggle="modal" data-bs-target="#frameworkModal"
+                     data-bs-title="Marketing Mix (4P)"
+                     data-bs-color="text-accent-blue"
+                     data-bs-content="<p>Bauran Pemasaran (Marketing Mix) adalah kumpulan variabel pemasaran taktis yang dapat dikendalikan perusahaan untuk menghasilkan respon yang diinginkan di pasar sasaran.</p><h5>Elemen 4P:</h5><ul><li><strong>Product:</strong> Barang/jasa yang ditawarkan (Kualitas, Desain, Fitur).</li><li><strong>Price:</strong> Strategi penetapan harga (Diskon, Payment terms).</li><li><strong>Place:</strong> Saluran distribusi (Toko fisik, E-commerce, Reseller).</li><li><strong>Promotion:</strong> Komunikasi pemasaran (Iklan, PR, Sales).</li></ul>">
+                    <span class="fw-badge bg-blue-soft">EXECUTION</span>
+                    <h5 class="fw-title">Marketing Mix (4P)</h5>
+                    <p class="fw-desc">Product, Price, Place, Promotion. 4 pilar utama dalam merancang penawaran produk ke pasar.</p>
+                    <button class="fw-btn theme-blue">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="storytelling" class="container py-5">
+        <div class="section-header">
+            <div class="section-icon bg-pink-soft"><i class="fas fa-theater-masks"></i></div>
+            <h3 class="mb-0 theme-pink">Brand Storytelling</h3>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col">
+                <div class="framework-card border-pink" data-bs-toggle="modal" data-bs-target="#frameworkModal"
+                     data-bs-title="Hero's Journey"
+                     data-bs-color="text-accent-pink"
+                     data-bs-content="<p>Struktur cerita klasik (Monomyth) yang digunakan dalam film Hollywood, kini diadaptasi untuk brand.</p><h5>Penerapan:</h5><p>Jadikan <strong>Customer sebagai HERO</strong> (bukan brand Anda). Brand Anda berperan sebagai <strong>GUIDE (Pemandu)</strong> yang memberikan Rencana/Alat untuk membantu Hero mencapai tujuannya dan menghindari kegagalan.</p>">
+                    <span class="fw-badge bg-pink-soft">NARRATIVE</span>
+                    <h5 class="fw-title">Hero's Journey</h5>
+                    <p class="fw-desc">Jadikan customer sebagai Pahlawan dalam cerita bisnis Anda, dan brand Anda sebagai Pemandu mereka.</p>
+                    <button class="fw-btn theme-pink">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="framework-card border-pink" data-bs-toggle="modal" data-bs-target="#frameworkModal"
+                     data-bs-title="Brand Archetypes"
+                     data-bs-color="text-accent-pink"
+                     data-bs-content="<p>12 Karakter universal yang mewakili kepribadian brand untuk membangun koneksi emosional.</p><h5>Contoh Populer:</h5><ul><li><strong>The Innocent:</strong> Murni, Bahagia (Contoh: Dove, Coca-Cola).</li><li><strong>The Hero:</strong> Kuat, Berani, Berprestasi (Contoh: Nike).</li><li><strong>The Rebel:</strong> Mendobrak aturan, Bebas (Contoh: Harley Davidson).</li><li><strong>The Sage:</strong> Bijaksana, Mencari kebenaran (Contoh: Google).</li></ul>">
+                    <span class="fw-badge bg-pink-soft">IDENTITY</span>
+                    <h5 class="fw-title">Brand Archetypes</h5>
+                    <p class="fw-desc">12 Kepribadian brand (seperti The Hero, The Creator) untuk membangun koneksi emosional dengan audiens.</p>
+                    <button class="fw-btn theme-pink">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="framework-card border-pink" data-bs-toggle="modal" data-bs-target="#frameworkModal"
+                     data-bs-title="Golden Circle"
+                     data-bs-color="text-accent-pink"
+                     data-bs-content="<p>Konsep Simon Sinek: 'People don't buy WHAT you do, they buy WHY you do it.'</p><h5>Urutan Komunikasi:</h5><ol><li><strong>WHY (Inti):</strong> Apa tujuan/keyakinan Anda? Mengapa bisnis ini ada?</li><li><strong>HOW:</strong> Bagaimana cara Anda merealisasikannya? (USP).</li><li><strong>WHAT:</strong> Apa produk/layanan yang Anda jual?</li></ol>">
+                    <span class="fw-badge bg-pink-soft">LOYALTY</span>
+                    <h5 class="fw-title">Golden Circle (Why)</h5>
+                    <p class="fw-desc">Mulai dari 'WHY'. Bangun loyalitas jangka panjang dengan mengkomunikasikan tujuan, bukan hanya produk.</p>
+                    <button class="fw-btn theme-pink">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="copywriting" class="container py-5">
+        <div class="section-header">
+            <div class="section-icon bg-green-soft"><i class="fas fa-pen-nib"></i></div>
+            <h3 class="mb-0 theme-green">Persuasive Copywriting</h3>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col">
+                <div class="framework-card border-green" data-bs-toggle="modal" data-bs-target="#frameworkModal"
+                     data-bs-title="AIDA Model"
+                     data-bs-color="text-accent-green"
+                     data-bs-content="<p>Struktur paling dasar untuk iklan dan landing page.</p><h5>4 Tahapan:</h5><ul><li><strong>Attention:</strong> Tangkap perhatian lewat headline yang kuat.</li><li><strong>Interest:</strong> Buat mereka tertarik dengan fakta/masalah relevan.</li><li><strong>Desire:</strong> Bangun hasrat dengan manfaat produk (emotional benefit).</li><li><strong>Action:</strong> Beritahu apa yang harus mereka lakukan selanjutnya (CTA).</li></ul>">
+                    <span class="fw-badge bg-green-soft">SALES</span>
+                    <h5 class="fw-title">AIDA Model</h5>
+                    <p class="fw-desc">Attention, Interest, Desire, Action. Struktur funneling klasik untuk mengarahkan audiens membeli.</p>
+                    <button class="fw-btn theme-green">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="framework-card border-green" data-bs-toggle="modal" data-bs-target="#frameworkModal"
+                     data-bs-title="PAS Framework"
+                     data-bs-color="text-accent-green"
+                     data-bs-content="<p>Formula copywriting yang sangat efektif karena menyentuh emosi negatif (rasa sakit) audiens.</p><h5>Langkah:</h5><ol><li><strong>Problem:</strong> Identifikasi masalah spesifik yang dihadapi audiens.</li><li><strong>Agitate:</strong> 'Taburkan garam di luka'. Jelaskan dampak buruk jika masalah tidak segera diatasi.</li><li><strong>Solution:</strong> Tawarkan produk Anda sebagai solusi terbaik.</li></ol>">
+                    <span class="fw-badge bg-green-soft">PAIN POINT</span>
+                    <h5 class="fw-title">PAS Framework</h5>
+                    <p class="fw-desc">Problem, Agitate, Solution. Fokus pada masalah audiens untuk menciptakan urgensi solusi.</p>
+                    <button class="fw-btn theme-green">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="framework-card border-green" data-bs-toggle="modal" data-bs-target="#frameworkModal"
+                     data-bs-title="FAB Technique"
+                     data-bs-color="text-accent-green"
+                     data-bs-content="<p>Teknik untuk mengubah spesifikasi teknis menjadi alasan emosional untuk membeli.</p><h5>Contoh (Powerbank):</h5><ul><li><strong>Feature (Fakta):</strong> Kapasitas 20.000 mAh.</li><li><strong>Advantage (Kegunaan):</strong> Bisa mengisi iPhone 5x.</li><li><strong>Benefit (Nilai bagi User):</strong> Tidak perlu cemas kehabisan baterai saat traveling jauh, tetap eksis update story.</li></ul>">
+                    <span class="fw-badge bg-green-soft">OFFER</span>
+                    <h5 class="fw-title">FAB Technique</h5>
+                    <p class="fw-desc">Feature, Advantage, Benefit. Ubah fitur teknis yang membosankan menjadi manfaat yang menggoda.</p>
+                    <button class="fw-btn theme-green">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-footer text-center">
+        <div class="container">
+            <h2 class="text-white mb-3 fw-bold">Bingung Menerapkan Framework?</h2>
+            <p class="text-muted mb-4 fs-5">
+                Jangan hanya teori. Mari diskusikan bagaimana menerapkan strategi ini ke dalam bisnis Anda.
+            </p>
+            <button class="btn btn-light rounded-pill px-5 py-3 fw-bold text-dark">Konsultasi Gratis</button>
+        </div>
+    </div>
+
+ <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h5 class="text-white fw-bold"><i class="fas fa-layer-group text-danger me-2"></i>Maroon Digital</h5>
+                    <p style="color: #cbd5e1; font-size: 0.95rem;">Partner strategis pertumbuhan bisnis Anda. Kami mengkombinasikan data, kreativitas, dan teknologi.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="bisnis-consulting.html">Consulting</a></li>
+                        <li><a style="color: #ffffff;"href="digital-marketing.html">Ads Management</a></li>
+                        <li><a style="color: #ffffff;" href="web-application-development.html">Web Development</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Perusahaan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="about.html">Tentang Kami</a></li>
+                        <li><a style="color: #ffffff;" href="https://wa.me/62895639068080" target="_blank">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Hubungi Kami</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2"><i class="fas fa-envelope me-2 text-danger"></i> <span style="color: #cbd5e1;">info@maroondigital.com</span></li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i> <span style="color: #cbd5e1;">Jakarta Selatan, Indonesia</span></li>
+                    </ul>
+                    <div class="mt-4">
+                        <a href="https://www.instagram.com/" class="me-3 fs-5 text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" class="me-3 fs-5 text-white"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/" class="me-3 fs-5 text-white"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 pt-4 border-top border-secondary border-opacity-25">
+                <div class="col-md-6 text-center text-md-start"><p class="small mb-0">&copy; 2023 Maroon Digital. All rights reserved.</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="frameworkModal" tabindex="-1" aria-labelledby="frameworkModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title" id="frameworkModalLabel">Detail Framework</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="frameworkContent">Loading content...</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <span class="small text-muted">© Maroon Digital Library</span>
+                    <button type="button" class="btn btn-outline-light btn-sm rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script untuk handle isi modal dinamis
+        const frameworkModal = document.getElementById('frameworkModal')
+        frameworkModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget
+            
+            const title = button.getAttribute('data-bs-title')
+            const content = button.getAttribute('data-bs-content')
+            const colorClass = button.getAttribute('data-bs-color')
+
+            const modalTitle = frameworkModal.querySelector('.modal-title')
+            const modalBody = frameworkModal.querySelector('#frameworkContent')
+
+            // Reset kelas warna judul sebelumnya
+            modalTitle.className = 'modal-title'; 
+            
+            modalTitle.textContent = title
+            modalTitle.classList.add(colorClass) // Tambahkan warna sesuai kategori
+            modalBody.innerHTML = content
+        })
+
+        // Script untuk Sticky Nav Active State saat di-scroll
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".sticky-subnav .nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

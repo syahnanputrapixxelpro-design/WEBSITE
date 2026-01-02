@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Setup & Transformation - Maroon Digital</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- COLOR PALETTE --- */
+            --primary-bg: #0B1120;
+            --card-bg: #161F32;
+            
+            --accent-cyan: #06b6d4; /* Cyan for Tech/Digital */
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f97316;
+            
+            /* Text Colors */
+            --text-heading: #ffffff;
+            --text-body: #e2e8f0;
+            --text-muted-bright: #cbd5e1; /* High Contrast Muted */
+            
+            --dropdown-bg: #111827;
+            --nav-link-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 { color: var(--text-heading); font-weight: 700; }
+        p, li { color: var(--text-body); }
+        
+        /* --- TEXT VISIBILITY FIX --- */
+        .text-muted { color: var(--text-muted-bright) !important; opacity: 0.9; }
+        .text-white-50 { color: rgba(255, 255, 255, 0.8) !important; }
+        
+        a { text-decoration: none; transition: 0.3s; color: inherit; }
+        
+        /* --- NAVBAR STYLES --- */
+        .navbar { background-color: rgba(11, 17, 32, 0.98); backdrop-filter: blur(16px); padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 1030; }
+        .navbar-brand { font-weight: 700; color: var(--text-heading) !important; font-size: 1.5rem; letter-spacing: -0.5px; }
+        .brand-accent { color: #dc2626; } /* Maroon Red */
+        .navbar-nav .nav-link { color: var(--nav-link-color) !important; font-weight: 500; font-size: 0.95rem; padding: 0.8rem 1.2rem !important; transition: color 0.3s; display: flex; align-items: center; gap: 6px; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active, .navbar-nav .show>.nav-link { color: #ffffff !important; }
+        .dropdown-toggle::after { display: none; }
+        .nav-link i.fa-chevron-down { font-size: 0.75rem; transition: transform 0.3s ease; }
+        .nav-item.dropdown:hover .nav-link i.fa-chevron-down { transform: rotate(180deg); }
+        .btn-nav-login { color: var(--text-heading) !important; border: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s; margin-top: 10px; }
+        .btn-nav-login:hover { background-color: var(--text-heading); color: var(--primary-bg) !important; }
+        @media (min-width: 992px) { .btn-nav-login { margin-top: 0; } }
+        
+        /* MEGA MENU STYLE */
+        .dropdown-menu.mega-menu { background-color: var(--dropdown-bg); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #dc2626; border-radius: 0 0 16px 16px; padding: 20px; margin-top: 0; }
+        @media (min-width: 992px) { 
+            .navbar-nav .nav-item { position: static; } 
+            .dropdown-menu.mega-menu { display: block; visibility: hidden; opacity: 0; transform: translateY(15px); transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); width: 100%; left: 0; right: 0; top: 90%; padding: 40px 0; box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.7); } 
+            .navbar-nav .nav-item.dropdown:hover .dropdown-menu { visibility: visible; opacity: 1; transform: translateY(0); } 
+        }
+        .mega-link { display: flex; align-items: start; padding: 16px; border-radius: 12px; text-decoration: none; color: var(--text-heading); transition: all 0.2s ease; } 
+        .mega-link:hover { background-color: rgba(255,255,255,0.03); transform: translateX(5px); } 
+        .mega-icon-box { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0; } 
+        .mega-link:hover .mega-icon-box { background: rgba(255,255,255,0.1); color: white; } 
+        .mega-link h6 { font-weight: 600; margin-bottom: 4px; font-size: 0.95rem; color: #f1f5f9; } 
+        .mega-link p { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0; line-height: 1.4; } 
+        .menu-category-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 700; margin-bottom: 15px; padding-left: 15px; } 
+        .best-seller-box { height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 1.5rem; border-radius: 1rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+
+        /* --- HERO SECTION --- */
+        .hero-setup {
+            padding: 160px 0 80px;
+            background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.15) 0%, var(--primary-bg) 70%);
+            text-align: center;
+        }
+        .hero-badge {
+            background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan);
+            padding: 8px 20px; border-radius: 50px; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+            display: inline-block; margin-bottom: 20px;
+        }
+        .hero-title { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; }
+        .hero-desc { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; color: var(--text-muted-bright); }
+
+        /* --- COMPARISON SECTION (RED VS GREEN) --- */
+        .comparison-card {
+            border-radius: 16px; padding: 40px; height: 100%; position: relative; overflow: hidden;
+            border: 1px solid; transition: 0.3s;
+        }
+        /* Red Card (The Problem) */
+        .comp-red {
+            background: linear-gradient(180deg, rgba(239, 68, 68, 0.05) 0%, rgba(11, 17, 32, 0) 100%);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .comp-red .icon-box { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+        .comp-red h4 { color: var(--accent-red); }
+        
+        /* Green/Cyan Card (The Solution) */
+        .comp-cyan {
+            background: linear-gradient(180deg, rgba(6, 182, 212, 0.05) 0%, rgba(11, 17, 32, 0) 100%);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+        .comp-cyan .icon-box { background: rgba(6, 182, 212, 0.1); color: var(--accent-cyan); }
+        .comp-cyan h4 { color: var(--accent-cyan); }
+
+        .comp-list li { margin-bottom: 12px; font-size: 0.95rem; color: var(--text-muted-bright); display: flex; align-items: center; gap: 10px; }
+        .comp-list i { font-size: 0.8rem; }
+        .icon-box { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+
+        /* --- COMPONENTS GRID --- */
+        .comp-grid-box {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px; padding: 30px; transition: 0.3s; height: 100%;
+        }
+        .comp-grid-box:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
+        .comp-grid-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: white; }
+        .comp-grid-desc { font-size: 0.9rem; color: var(--text-muted-bright); line-height: 1.6; }
+
+        /* --- THE PROCESS PATH --- */
+        .path-card {
+            padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02); margin-bottom: 20px; position: relative;
+        }
+        .path-step {
+            width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.9rem; margin-right: 15px; flex-shrink: 0;
+        }
+        /* Step Colors */
+        .step-1 { background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); }
+        .step-2 { background: rgba(139, 92, 246, 0.2); color: var(--accent-purple); }
+        .step-3 { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+        .step-4 { background: rgba(249, 115, 22, 0.2); color: var(--accent-orange); }
+
+        /* --- FAQ SECTION --- */
+        .accordion-item { background-color: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 15px; border-radius: 12px !important; overflow: hidden; }
+        .accordion-button { background-color: var(--card-bg); color: white; box-shadow: none; font-weight: 600; padding: 20px; }
+        .accordion-button:not(.collapsed) { background-color: rgba(6, 182, 212, 0.1); color: var(--accent-cyan); box-shadow: none; }
+        .accordion-button::after { filter: invert(1); }
+        .accordion-body { color: var(--text-muted-bright); padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        /* --- CTA FOOTER --- */
+        .cta-section { background: linear-gradient(135deg, #083344 0%, #0e7490 100%); padding: 80px 0; margin-top: 80px; border-radius: 20px; text-align: center; }
+        
+        /* --- FOOTER STYLES --- */
+        footer { background-color: #020617; padding: 80px 0 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 1rem; margin-top: 80px; }
+        footer h5 { color: var(--text-heading); margin-bottom: 20px; font-weight: 600; }
+        footer a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 12px; }
+        footer a:hover { color: var(--accent-red); transform: translateX(5px); }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .comp-list { margin-bottom: 30px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="fas fa-layer-group brand-accent me-2"></i>
+                Maroon<span class="text-white fw-light ms-1">Digital</span>
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Services <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-5 mb-4 mb-lg-0">
+                                        <div class="menu-category-title">Core Services</div>
+                                        <a href="digital-marketing.html" class="mega-link">
+                                            <div class="mega-icon-box text-warning"><i class="fas fa-bullhorn"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Digital Marketing</h6>
+                                                <p>Strategi marketing terukur & profitabel.</p>
+                                            </div>
+                                        </a>
+                                        <a href="socialmedia-management.html" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-users"></i></div>
+                                            <div>
+                                                <h6>Social Media Management</h6>
+                                                <p>Konten kreatif untuk engagement tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="web-application-development.html" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-code"></i></div>
+                                            <div>
+                                                <h6>Web Application</h6>
+                                                <p>Sistem web custom untuk bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Growth</div>
+                                        <a href="jasa-pembuatan-landing-page.html" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-laptop-code"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Landing Page Service</h6>
+                                                <p>Halaman penawaran konversi tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="bisnis-consulting.html" class="mega-link">
+                                            <div class="mega-icon-box text-danger"><i class="fas fa-comments"></i></div>
+                                            <div>
+                                                <h6>Business Consulting</h6>
+                                                <p>Sesi konsultasi bedah bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-3 border-start border-secondary border-opacity-25 d-none d-lg-block">
+                                        <div class="best-seller-box">
+                                            <i class="fas fa-crown text-warning fa-2x mb-3"></i>
+                                            <h6 class="text-white small fw-bold">Best Seller</h6>
+                                            <p class="text-white-50 small" style="font-size: 0.8rem;">Paket Full Service
+                                                Pro paling banyak diminati.</p>
+                                            <a href="Index.html"
+                                                class="btn btn-sm btn-outline-warning rounded-pill mt-2">Lihat Paket</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="frameworkDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Marketing Framework <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="frameworkDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Fundamentals</div>
+                                        <a href="framework.html#fundamentals" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-book-open"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Overview</h6>
+                                                <p>50+ Marketing Framework.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Execution</div>
+                                        <a href="framework.html#copywriting" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-pen-nib"></i></div>
+                                            <div>
+                                                <h6>Copywriting</h6>
+                                                <p>Teknik Menulis Penawaran.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Advance</div>
+                                        <a href="framework.html#storytelling" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-theater-masks"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Storytelling</h6>
+                                                <p>Membangun Narasi Brand.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <a href="https://wa.me/62895639068080" target="_blank" class="btn btn-nav-login ms-lg-3">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-setup">
+        <div class="container">
+            <span class="hero-badge">Digital Setup & Transformation</span>
+            <h1 class="hero-title fw-bold text-white">Bangun Pondasi Digital <br> <span style="color: var(--accent-cyan);">Kuat & Otomatis</span></h1>
+            <p class="hero-desc">Tinggalkan cara kerja manual yang rentan <em>human error</em>. Kami membantu Anda membangun ekosistem digital yang terintegrasi, rapi, dan siap untuk <em>scale-up</em>.</p>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="row g-4 align-items-center">
+            
+            <div class="col-lg-6">
+                <div class="comparison-card comp-red">
+                    <div class="icon-box"><i class="fas fa-times"></i></div>
+                    <h4 class="fw-bold mb-3">Tanpa Digital Setup</h4>
+                    <ul class="list-unstyled comp-list">
+                        <li><i class="fas fa-times-circle text-danger"></i> Data pelanggan berantakan di Excel/Notes.</li>
+                        <li><i class="fas fa-times-circle text-danger"></i> Laporan keuangan sering telat & tidak akurat.</li>
+                        <li><i class="fas fa-times-circle text-danger"></i> Tim bingung dengan SOP yang berubah-ubah.</li>
+                        <li><i class="fas fa-times-circle text-danger"></i> Keputusan bisnis hanya berdasarkan "feeling".</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="comparison-card comp-cyan">
+                    <div class="icon-box"><i class="fas fa-check"></i></div>
+                    <h4 class="fw-bold mb-3">Dengan Digital Setup</h4>
+                    <ul class="list-unstyled comp-list">
+                        <li><i class="fas fa-check-circle text-info"></i> Database rapi, terpusat dalam CRM.</li>
+                        <li><i class="fas fa-check-circle text-info"></i> Laporan realtime, bisa diakses kapan saja.</li>
+                        <li><i class="fas fa-check-circle text-info"></i> Workflow otomatis, tim lebih produktif.</li>
+                        <li><i class="fas fa-check-circle text-info"></i> Keputusan strategis berbasis Data Analytics.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="text-center mb-5">
+            <h6 style="color: var(--accent-cyan); letter-spacing: 2px;" class="fw-bold text-uppercase">Our Components</h6>
+            <h2 class="text-white fw-bold">Apa Saja yang Kami Siapkan?</h2>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="comp-grid-box">
+                    <div class="text-info fs-2 mb-3"><i class="fas fa-server"></i></div>
+                    <h5 class="comp-grid-title">Infrastructure</h5>
+                    <p class="comp-grid-desc">Setup domain, hosting, email bisnis profesional, dan keamanan data dasar.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="comp-grid-box">
+                    <div class="text-success fs-2 mb-3"><i class="fas fa-tools"></i></div>
+                    <h5 class="comp-grid-title">Marketing Tech</h5>
+                    <p class="comp-grid-desc">Integrasi Pixel, Google Analytics 4, CRM, dan Tools Email Marketing.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="comp-grid-box">
+                    <div class="text-warning fs-2 mb-3"><i class="fas fa-tasks"></i></div>
+                    <h5 class="comp-grid-title">Process & SOP</h5>
+                    <p class="comp-grid-desc">Digitalisasi alur kerja tim menggunakan Project Management Tools (Trello/Notion).</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="comp-grid-box">
+                    <div class="text-danger fs-2 mb-3"><i class="fas fa-chart-pie"></i></div>
+                    <h5 class="comp-grid-title">Data Analytics</h5>
+                    <p class="comp-grid-desc">Pembuatan Dashboard monitoring performa bisnis (Looker Studio).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="row">
+            <div class="col-lg-5 mb-4">
+                <h6 style="color: var(--accent-purple);" class="fw-bold text-uppercase ls-1">The Roadmap</h6>
+                <h2 class="text-white fw-bold mb-4">Langkah Transformasi</h2>
+                <p class="text-muted-bright">Kami tidak langsung mengubah segalanya. Kami melakukan pendekatan bertahap agar tim Anda bisa beradaptasi dengan teknologi baru tanpa merasa terbebani.</p>
+                <div class="mt-4">
+                    <a href="https://wa.me/62895639068080" class="btn btn-outline-light rounded-pill px-4">Konsultasi Gratis</a>
+                </div>
+            </div>
+            <div class="col-lg-6 offset-lg-1">
+                
+                <div class="path-card d-flex align-items-center">
+                    <div class="path-step step-1">01</div>
+                    <div>
+                        <h6 class="text-white fw-bold mb-1">Audit & Discovery</h6>
+                        <p class="mb-0 small text-muted-bright">Menganalisis sistem yang Anda pakai sekarang dan mencari celah inefisiensi.</p>
+                    </div>
+                </div>
+
+                <div class="path-card d-flex align-items-center">
+                    <div class="path-step step-2">02</div>
+                    <div>
+                        <h6 class="text-white fw-bold mb-1">Strategy Blueprint</h6>
+                        <p class="mb-0 small text-muted-bright">Merancang arsitektur digital yang paling sesuai dengan budget dan kebutuhan.</p>
+                    </div>
+                </div>
+
+                <div class="path-card d-flex align-items-center">
+                    <div class="path-step step-3">03</div>
+                    <div>
+                        <h6 class="text-white fw-bold mb-1">Implementation</h6>
+                        <p class="mb-0 small text-muted-bright">Instalasi, integrasi, dan migrasi data ke sistem baru yang lebih canggih.</p>
+                    </div>
+                </div>
+
+                <div class="path-card d-flex align-items-center">
+                    <div class="path-step step-4">04</div>
+                    <div>
+                        <h6 class="text-white fw-bold mb-1">Training & Handover</h6>
+                        <p class="mb-0 small text-muted-bright">Melatih tim Anda cara menggunakan tools baru hingga mahir.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5" style="max-width: 800px;">
+        <div class="text-center mb-5">
+            <h2 class="text-white fw-bold">Pertanyaan Umum (FAQ)</h2>
+        </div>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Berapa lama proses setup ini memakan waktu?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Tergantung kompleksitas bisnis Anda. Untuk setup dasar biasanya memakan waktu 2-3 minggu, sedangkan transformasi menyeluruh bisa memakan waktu 1-2 bulan.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Apakah saya perlu langganan software mahal?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Tidak selalu. Kami akan merekomendasikan tools yang sesuai budget. Ada banyak tools open-source atau freemium yang sangat powerful untuk memulai.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Apakah tim saya akan diajari cara pakainya?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Pasti. Bagian terpenting dari layanan ini adalah Training. Kami memastikan tim Anda nyaman dan paham menggunakan sistem baru sebelum kami lepas.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="cta-section">
+            <div class="container">
+                <h2 class="text-white fw-bold mb-3">Siap untuk Transformasi Digital?</h2>
+                <p class="text-white text-opacity-75 mb-4" style="max-width: 600px; margin: 0 auto;">Jangan biarkan kompetitor menyalip Anda karena teknologi mereka lebih canggih. Upgrade bisnis Anda sekarang.</p>
+                <a href="https://wa.me/62895639068080" class="btn btn-light rounded-pill px-5 py-3 fw-bold text-info" style="color: #0e7490 !important;">Konsultasi Setup Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h5 class="text-white fw-bold"><i class="fas fa-layer-group text-danger me-2"></i>Maroon Digital</h5>
+                    <p style="color: #cbd5e1; font-size: 0.95rem;">Partner strategis pertumbuhan bisnis Anda. Kami mengkombinasikan data, kreativitas, dan teknologi.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="bisnis-consulting.html">Consulting</a></li>
+                        <li><a style="color: #ffffff;" href="digital-marketing.html">Ads Management</a></li>
+                        <li><a style="color: #ffffff;" href="web-application-development.html">Web Development</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Perusahaan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="about.html">Tentang Kami</a></li>
+                        <li><a style="color: #ffffff;" href="https://wa.me/62895639068080" target="_blank">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Hubungi Kami</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2"><i class="fas fa-envelope me-2 text-danger"></i> <span style="color: #cbd5e1;">info@maroondigital.com</span></li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i> <span style="color: #cbd5e1;">Jakarta Selatan, Indonesia</span></li>
+                    </ul>
+                    <div class="mt-4">
+                        <a href="https://www.instagram.com/" class="me-3 fs-5 text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" class="me-3 fs-5 text-white"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/" class="me-3 fs-5 text-white"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 pt-4 border-top border-secondary border-opacity-25">
+                <div class="col-md-6 text-center text-md-start"><p class="small mb-0">&copy; 2023 Maroon Digital. All rights reserved.</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

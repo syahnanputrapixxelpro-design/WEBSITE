@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maroon Digital - Transformasi Bisnis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- COLOR PALETTE --- */
+            --primary-bg: #0B1120;
+            --card-bg: #161F32;
+
+            --accent-green: #34d399;
+            --accent-teal-dark: #0f766e;
+            --accent-red: #f87171;
+            --accent-maroon: #dc2626;
+            --accent-blue: #3b82f6;
+
+            --text-heading: #ffffff;
+            --text-high-contrast: #f8fafc;
+            --text-body: #e2e8f0;
+            --text-muted: #94a3b8;
+
+            --sidebar-bg: #111827;
+            --sidebar-btn-bg: #1f2937;
+            --dropdown-bg: #111827;
+            --nav-link-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-body);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: var(--text-heading);
+            font-weight: 700;
+        }
+
+        .text-bright {
+            color: var(--text-high-contrast) !important;
+            opacity: 1 !important;
+            font-weight: 400;
+        }
+
+        /* --- NAVBAR STYLES --- */
+        .navbar {
+            background-color: rgba(11, 17, 32, 0.98);
+            backdrop-filter: blur(16px);
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1030;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--text-heading) !important;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-accent {
+            color: var(--accent-maroon);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--nav-link-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.8rem 1.2rem !important;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active,
+        .navbar-nav .show>.nav-link {
+            color: #ffffff;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .nav-link i.fa-chevron-down {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item.dropdown:hover .nav-link i.fa-chevron-down,
+        .nav-item.dropdown .nav-link.show i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .btn-nav-login {
+            color: var(--text-heading);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        @media (min-width: 992px) {
+            .btn-nav-login {
+                margin-top: 0;
+            }
+        }
+
+        .btn-nav-login:hover {
+            background-color: var(--text-heading);
+            color: var(--primary-bg);
+        }
+
+        /* --- MOBILE MENU SCROLL FIX --- */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                max-height: 80vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding-bottom: 20px;
+                scrollbar-width: thin;
+                scrollbar-color: var(--accent-maroon) transparent;
+            }
+
+            .navbar-collapse::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            .navbar-collapse::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .navbar-collapse::-webkit-scrollbar-thumb {
+                background-color: var(--accent-maroon);
+                border-radius: 10px;
+            }
+        }
+
+        /* --- MEGA MENU --- */
+        .dropdown-menu.mega-menu {
+            background-color: var(--dropdown-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 3px solid var(--accent-maroon);
+            border-radius: 0 0 16px 16px;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item {
+                position: static;
+            }
+
+            .dropdown-menu.mega-menu {
+                display: block;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateY(15px);
+                transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                width: 100%;
+                left: 0;
+                right: 0;
+                top: 90%;
+                padding: 40px 0;
+                box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.7);
+            }
+
+            .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .dropdown-menu.mega-menu {
+                border-radius: 8px;
+                margin: 10px;
+            }
+
+            .menu-category-title {
+                margin-top: 20px;
+            }
+
+            .mega-link {
+                padding: 10px;
+            }
+        }
+
+        .mega-link {
+            display: flex;
+            align-items: start;
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-heading);
+            transition: all 0.2s ease;
+        }
+
+        .mega-link:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+            transform: translateX(5px);
+        }
+
+        .mega-icon-box {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .mega-link:hover .mega-icon-box {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .mega-link h6 {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+            color: #f1f5f9;
+        }
+
+        .mega-link p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        .menu-category-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-left: 15px;
+        }
+
+        /* BEST SELLER BOX FIX */
+        .best-seller-box {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            /* Fix Background: Dark Transparent instead of White */
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* --- SIDEBAR NAV --- */
+        .sidebar-nav-container {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1040;
+            display: none;
+        }
+
+        @media (min-width: 992px) {
+            .sidebar-nav-container {
+                display: block;
+            }
+        }
+
+        .sidebar-nav {
+            background-color: var(--sidebar-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 10px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar-link {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            background-color: var(--sidebar-btn-bg);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .sidebar-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-link.active {
+            background-color: var(--accent-teal-dark) !important;
+            color: white !important;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+            transform: scale(1.1);
+        }
+
+        /* --- UTILITIES & BUTTONS --- */
+        .text-green {
+            color: var(--accent-green) !important;
+        }
+
+        .text-red {
+            color: var(--accent-red) !important;
+        }
+
+        .text-maroon {
+            color: var(--accent-maroon) !important;
+        }
+
+        .btn-custom-red {
+            background-color: var(--accent-maroon);
+            color: white;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+            width: 100%;
+            max-width: 320px;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-custom-red:hover {
+            background-color: #b91c1c;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(220, 38, 38, 0.5);
+        }
+
+        /* --- SECTIONS --- */
+        .hero-section {
+            padding: 140px 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at top center, rgba(220, 38, 38, 0.15) 0%, rgba(11, 17, 32, 0) 50%);
+        }
+
+        @media (min-width: 992px) {
+            .hero-section {
+                padding-top: 180px;
+            }
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        @media (min-width: 992px) {
+            .hero-title {
+                font-size: 3.5rem;
+                line-height: 1.1;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #cbd5e1;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+
+        @media (min-width: 992px) {
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 20px;
+            border-radius: 50px;
+            margin: 5px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- STATS ROW (FIX CENTER) --- */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 3rem auto;
+            text-align: center;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .stats-row {
+                flex-direction: row;
+                gap: 4rem;
+            }
+        }
+
+        .stat-item h4 {
+            color: #fbbf24;
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 0;
+        }
+
+        .stat-item p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        /* Transformation Image */
+        .transformation-img {
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Problem Cards */
+        .problem-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            border-radius: 20px;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-red);
+        }
+
+        .icon-box-red {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .problem-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            padding: 30px;
+            border-radius: 16px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+        }
+
+        .testimonial-quote {
+            color: #e2e8f0;
+            font-style: italic;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* --- PRICING SECTION --- */
+        .pricing-section {
+            padding: 100px 0;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.basic {
+            border-top: 4px solid var(--accent-maroon);
+        }
+
+        .pricing-card.standard {
+            border-top: 4px solid var(--accent-blue);
+        }
+
+        .pricing-card.pro {
+            border-top: 4px solid var(--accent-green);
+            background: var(--card-bg);
+        }
+
+        .price-current {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: start;
+        }
+
+        .feature-list li i {
+            margin-right: 12px;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        /* --- PRICING BUTTONS HOVER EFFECT --- */
+        .btn-pricing {
+            background-color: transparent;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: auto;
+            border-width: 2px;
+            border-style: solid;
+        }
+
+        .btn-pricing-basic {
+            border-color: var(--accent-maroon);
+        }
+
+        .btn-pricing-basic:hover {
+            background-color: var(--accent-maroon);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-pricing-standard {
+            border-color: var(--accent-blue);
+        }
+
+        .btn-pricing-standard:hover {
+            background-color: var(--accent-blue);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-pricing-pro {
+            border-color: var(--accent-green);
+        }
+
+        .btn-pricing-pro:hover {
+            background-color: var(--accent-green);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: #020617;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        footer a:hover {
+            color: var(--accent-red);
+            transform: translateX(5px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body tabindex="0">
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="fas fa-layer-group brand-accent me-2"></i>
+                Maroon<span class="text-white fw-light ms-1">Digital</span>
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Services <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-5 mb-4 mb-lg-0">
+                                        <div class="menu-category-title">Core Services</div>
+                                        <a href="digital-marketing.html" class="mega-link">
+                                            <div class="mega-icon-box text-warning"><i class="fas fa-bullhorn"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Digital Marketing</h6>
+                                                <p>Strategi marketing terukur & profitabel.</p>
+                                            </div>
+                                        </a>
+                                        <a href="socialmedia-management.html" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-users"></i></div>
+                                            <div>
+                                                <h6>Social Media Management</h6>
+                                                <p>Konten kreatif untuk engagement tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="web-application-development.html" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-code"></i></div>
+                                            <div>
+                                                <h6>Web Application</h6>
+                                                <p>Sistem web custom untuk bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Growth</div>
+                                        <a href="jasa-pembuatan-landing-page.html" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-laptop-code"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Landing Page Service</h6>
+                                                <p>Halaman penawaran konversi tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="bisnis-consulting.html" class="mega-link">
+                                            <div class="mega-icon-box text-danger"><i class="fas fa-comments"></i></div>
+                                            <div>
+                                                <h6>Business Consulting</h6>
+                                                <p>Sesi konsultasi bedah bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 border-start border-secondary border-opacity-25 d-none d-lg-block">
+                                        <div class="best-seller-box">
+                                            <i class="fas fa-crown text-warning fa-2x mb-3"></i>
+                                            <h6 class="text-white small fw-bold">Best Seller</h6>
+                                            <p class="text-white-50 small" style="font-size: 0.8rem;">Paket Full Service
+                                                Pro paling banyak diminati.</p>
+                                            <a href="Index.html"
+                                                class="btn btn-sm btn-outline-warning rounded-pill mt-2">Lihat Paket</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="frameworkDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Marketing Framework <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="frameworkDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Fundamentals</div>
+                                        <a href="framework.html#fundamentals" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-book-open"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Overview</h6>
+                                                <p>50+ Marketing Framework.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Execution</div>
+                                        <a href="framework.html#copywriting" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-pen-nib"></i></div>
+                                            <div>
+                                                <h6>Copywriting</h6>
+                                                <p>Teknik Menulis Penawaran.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Advance</div>
+                                        <a href="framework.html#storytelling" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-theater-masks"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Storytelling</h6>
+                                                <p>Membangun Narasi Brand.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <a href="https://wa.me/62895639068080" target="_blank" class="btn btn-nav-login ms-lg-3">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-nav-container">
+        <nav id="sidebar-menu" class="sidebar-nav">
+            <a class="sidebar-link active" href="#hero" title="Home"><i class="fas fa-bullseye"></i></a>
+            <a class="sidebar-link" href="#transformation" title="Transformasi"><i class="fas fa-image"></i></a>
+            <a class="sidebar-link" href="#problems" title="Masalah"><i class="fas fa-exclamation-triangle"></i></a>
+            <a class="sidebar-link" href="#testimonials" title="Testimoni"><i class="fas fa-user-group"></i></a>
+            <a class="sidebar-link" href="#pricing" title="Harga"><i class="fas fa-dollar-sign"></i></a>
+        </nav>
+    </div>
+
+    <section id="hero" class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div
+                        class="d-inline-block px-3 py-1 rounded-pill bg-danger bg-opacity-25 border border-danger border-opacity-50 mb-4">
+                        <p class="text-red fw-bold small mb-0 tracking-wide text-uppercase">LIMITED SPOTS: 2 SLOT
+                            TERSISA</p>
+                    </div>
+                    <h1 class="hero-title">Kami Bantu Bisnis Indonesia <br><span class="text-green">Selesaikan 3 Masalah
+                            Besar</span> <br>dalam 2-5 Minggu</h1>
+                    <p class="hero-subtitle">Cara baru mengembangkan bisnis yang teruji menyelesaikan masalah performa
+                        penjualan, operasional, dan branding bisnis Anda bersama <strong>Maroon Digital</strong>.</p>
+                    <div class="d-flex justify-content-center flex-wrap gap-3 mb-5">
+                        <div class="highlight-box text-red"><i class="fas fa-fire me-2"></i> Tidak perlu bakar uang
+                            iklan boncos</div>
+                        <div class="highlight-box text-green"><i class="fas fa-check-circle me-2"></i> Fokus strategi
+                            yang Proven &amp; Efektif</div>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h4>50+</h4>
+                            <p>Bisnis Dibantu</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>2-5</h4>
+                            <p>Minggu Hasil</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>300%</h4>
+                            <p>Avg. Growth</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-custom-red">Daftar Sekarang <i class="fas fa-arrow-right ms-2"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="transformation" class="py-5">
+        <div class="container text-center">
+            <p class="text-green fw-bold mb-2">TRANSFORMASI NYATA</p>
+            <h2 class="fw-bold mb-4">Transformasi <span class="text-green">Pengusaha Indonesia</span></h2>
+            <p class="text-bright mb-5 fs-5">
+                Lihat bagaimana mereka bertransformasi dari stress karena boncos menjadi<br>senyum sumringah dengan
+                profit maksimal.
+            </p>
+            <div class="transformation-img">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+                    alt="Transformasi Bisnis" class="img-fluid w-100"
+                    style="object-fit: cover; height: 500px; opacity: 0.8;">
+                <div class="position-absolute top-50 start-50 translate-middle w-100">
+                    <div class="d-inline-block p-3 bg-dark bg-opacity-75 rounded backdrop-blur">
+                        <h5 class="text-white mb-0">[Area Gambar Before-After Anda]</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5"><button class="btn btn-outline-light px-5 py-2 rounded-pill">Lihat Studi Kasus
+                    Lengkap</button></div>
+        </div>
+    </section>
+
+    <section id="problems" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="text-red fw-bold mb-2">MASALAH UMUM PENGUSAHA</p>
+                <h2 class="fw-bold">Mengapa Bisnis Anda <span class="text-red">Tertinggal?</span></h2>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-5">
+                    <div class="problem-card">
+                        <div class="icon-box-red"><i class="fas fa-wallet"></i></div>
+                        <h4 class="fw-bold mb-3">Iklan Boncos Terus Menerus</h4>
+                        <p class="problem-desc">Anda terus membakar uang untuk iklan tanpa hasil yang jelas. Biaya
+                            akuisisi pelanggan (CAC) tinggi membuat cashflow berantakan dan margin menipis.</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="problem-card">
+                        <div class="icon-box-red"><i class="fas fa-chart-line" style="transform: scaleY(-1);"></i></div>
+                        <h4 class="fw-bold mb-3">Stagnan & Kalah Kompetisi</h4>
+                        <p class="problem-desc">Sudah mencoba berbagai cara tapi omset stagnan. Kompetitor semakin
+                            agresif mengambil pasar sementara Anda sibuk mengurusi operasional harian.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="text-primary fw-bold mb-2">CLIENT SUCCESS STORY</p>
+                <h2 class="fw-bold">Kata Mereka Tentang <span class="text-primary">Maroon Digital</span></h2>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-5">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-secondary rounded-circle me-3"
+                                style="width: 50px; height: 50px; background-image: url('https://randomuser.me/api/portraits/men/32.jpg'); background-size: cover;">
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold text-white">Budi Santoso</h6><small class="text-white-50">Owner
+                                    Coffee Shop</small>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote">"Awalnya ragu, tapi setelah 3 minggu omset naik 200%. Tim Maroon
+                            Digital sangat detail dalam membedah masalah bisnis saya."</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-secondary rounded-circle me-3"
+                                style="width: 50px; height: 50px; background-image: url('https://randomuser.me/api/portraits/women/44.jpg'); background-size: cover;">
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold text-white">Siti Aminah</h6><small class="text-white-50">Fashion
+                                    Brand Owner</small>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote">"Sistem funneling yang dibuatkan benar-benar bekerja otomatis.
+                            Sekarang saya bisa fokus ke produksi, marketing sudah beres."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Investasi yang <span class="text-green">Pasti Menguntungkan</span></h2>
+                <p class="text-bright">Pilih paket partnership yang sesuai dengan skala bisnis Anda.</p>
+            </div>
+            <div class="row g-4 justify-content-center align-items-stretch">
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card basic">
+                        <h5 class="fw-bold text-white">Monthly Consulting</h5>
+                        <p class="small text-white-50 mb-4">Pendampingan strategi rutin</p>
+                        <div class="mb-4">
+                            <span class="text-decoration-line-through text-muted">Rp 6.000.000</span><br>
+                            <span class="price-current text-maroon">Rp 3.790k</span>
+                            <span class="small text-white-50">/ bulan</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check text-red"></i> 4x Sesi Zoom / Bulan</li>
+                            <li><i class="fas fa-check text-red"></i> Audit Performa Mingguan</li>
+                        </ul>
+                        <a href="monthly-consulting.html" class="btn btn-pricing btn-pricing-basic">
+                            Pilih Paket Basic
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card standard">
+                        <h5 class="fw-bold text-white">Digital Setup</h5>
+                        <p class="small text-white-50 mb-4">Setup pondasi digital lengkap</p>
+                        <div class="mb-4">
+                            <span class="text-decoration-line-through text-muted">Rp 7.500.000</span><br>
+                            <span class="price-current text-primary">Rp 5.990k</span>
+                            <span class="small text-white-50">/ project</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check text-primary"></i> Setup Ads Manager</li>
+                            <li><i class="fas fa-check text-primary"></i> Pembuatan Landing Page</li>
+                        </ul>
+                        <a href="digital-setup.html" class="btn btn-pricing btn-pricing-standard">
+                            Pilih Paket Setup
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card pro position-relative">
+                        <div class="position-absolute top-0 end-0 m-3"><span
+                                class="badge bg-success text-black fw-bold">Recommended</span></div>
+                        <h5 class="fw-bold text-green">Professional Scale Up</h5>
+                        <p class="small text-white-50 mb-4">Full handling & eksekusi masif</p>
+                        <div class="mb-4">
+                            <span class="text-decoration-line-through text-muted">Rp 35.000.000</span><br>
+                            <span class="price-current text-green">Rp 25.000k</span>
+                            <span class="small text-white-50">/ project</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle text-green"></i> <strong>Semua Benefit Setup</strong></li>
+                            <li><i class="fas fa-check-circle text-green"></i> Funneling System Lengkap</li>
+                            <li><i class="fas fa-check-circle text-green"></i> Dedicated Account Manager</li>
+                        </ul>
+                        <a href="professional-scale-up.html" class="btn btn-pricing btn-pricing-pro">
+                            Ambil Paket Pro
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h5 class="text-white fw-bold"><i class="fas fa-layer-group text-danger me-2"></i>Maroon Digital
+                    </h5>
+                    <p style="color: #cbd5e1; font-size: 0.95rem;">Partner strategis pertumbuhan bisnis Anda. Kami
+                        mengkombinasikan data, kreativitas, dan teknologi.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="bisnis-consulting.html">Consulting</a></li>
+                        <li><a style="color: #ffffff;" href="digital-marketing.html">Ads Management</a></li>
+                        <li><a style="color: #ffffff;" href="web-application-development.html">Web Development</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Perusahaan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="about.html">Tentang Kami</a></li>
+                        <li><a style="color: #ffffff;" href="https://wa.me/62895639068080" target="_blank">Kontak</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Hubungi Kami</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2"><i class="fas fa-envelope me-2 text-danger"></i> <span
+                                style="color: #cbd5e1;">info@maroondigital.com</span></li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i> <span
+                                style="color: #cbd5e1;">Jakarta Selatan, Indonesia</span></li>
+                    </ul>
+                    <div class="mt-4">
+                        <a href="https://www.instagram.com/" class="me-3 fs-5 text-white"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" class="me-3 fs-5 text-white"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/" class="me-3 fs-5 text-white"><i
+                                class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 pt-4 border-top border-secondary border-opacity-25">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">&copy; 2023 Maroon Digital. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll('.sidebar-link');
+            const sections = document.querySelectorAll('section');
+
+            // 1. Fungsi saat Tombol Diklik
+            links.forEach(link => {
+                link.addEventListener('click', function () {
+                    links.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // 2. Fungsi saat Layar di-Scroll
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    // Deteksi jika scroll sudah melewati 1/3 bagian section
+                    if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    // Jika href link cocok dengan id section yang sedang aktif
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

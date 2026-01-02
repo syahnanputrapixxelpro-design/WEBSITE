@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membangun SOP Tim WFA - Maroon Digital</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- COLOR PALETTE --- */
+            --primary-bg: #0B1120;
+            --card-bg: #161F32;
+            
+            --accent-green: #34d399; /* Green for Business */
+            --accent-red: #f87171;
+            --accent-maroon: #dc2626;
+            --accent-blue: #3b82f6;
+            
+            /* Text Colors */
+            --text-heading: #ffffff;
+            --text-body: #e2e8f0;
+            --text-muted: #94a3b8; /* Fixed High Contrast */
+            
+            --dropdown-bg: #111827;
+            --nav-link-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-body);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 { color: var(--text-heading); font-weight: 700; }
+        p, li { color: var(--text-body); }
+        
+        /* Force Muted Text to be Visible */
+        .text-muted { color: var(--text-muted) !important; }
+        
+        a { text-decoration: none; transition: 0.3s; color: inherit; }
+        
+        /* --- NAVBAR STYLES --- */
+        .navbar { background-color: rgba(11, 17, 32, 0.98); backdrop-filter: blur(16px); padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 1030; }
+        .navbar-brand { font-weight: 700; color: var(--text-heading) !important; font-size: 1.5rem; letter-spacing: -0.5px; }
+        .brand-accent { color: var(--accent-maroon); }
+        .navbar-nav .nav-link { color: var(--nav-link-color) !important; font-weight: 500; font-size: 0.95rem; padding: 0.8rem 1.2rem !important; transition: color 0.3s; display: flex; align-items: center; gap: 6px; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active, .navbar-nav .show>.nav-link { color: #ffffff !important; }
+        .dropdown-toggle::after { display: none; }
+        .nav-link i.fa-chevron-down { font-size: 0.75rem; transition: transform 0.3s ease; }
+        .nav-item.dropdown:hover .nav-link i.fa-chevron-down { transform: rotate(180deg); }
+        .btn-nav-login { color: var(--text-heading) !important; border: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s; margin-top: 10px; }
+        .btn-nav-login:hover { background-color: var(--text-heading); color: var(--primary-bg) !important; }
+        @media (min-width: 992px) { .btn-nav-login { margin-top: 0; } }
+        
+        /* MEGA MENU STYLE */
+        .dropdown-menu.mega-menu { background-color: var(--dropdown-bg); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid var(--accent-maroon); border-radius: 0 0 16px 16px; padding: 20px; margin-top: 0; }
+        @media (min-width: 992px) { 
+            .navbar-nav .nav-item { position: static; } 
+            .dropdown-menu.mega-menu { display: block; visibility: hidden; opacity: 0; transform: translateY(15px); transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); width: 100%; left: 0; right: 0; top: 90%; padding: 40px 0; box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.7); } 
+            .navbar-nav .nav-item.dropdown:hover .dropdown-menu { visibility: visible; opacity: 1; transform: translateY(0); } 
+        }
+        .mega-link { display: flex; align-items: start; padding: 16px; border-radius: 12px; text-decoration: none; color: var(--text-heading); transition: all 0.2s ease; } 
+        .mega-link:hover { background-color: rgba(255,255,255,0.03); transform: translateX(5px); } 
+        .mega-icon-box { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0; } 
+        .mega-link:hover .mega-icon-box { background: rgba(255,255,255,0.1); color: white; } 
+        .mega-link h6 { font-weight: 600; margin-bottom: 4px; font-size: 0.95rem; color: #f1f5f9; } 
+        .mega-link p { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0; line-height: 1.4; } 
+        .menu-category-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 700; margin-bottom: 15px; padding-left: 15px; } 
+        .best-seller-box { height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 1.5rem; border-radius: 1rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+
+        /* --- ARTICLE LAYOUT (SIMPLIFIED) --- */
+        .article-container {
+            max-width: 760px; /* Lebar optimal untuk membaca */
+            margin: 0 auto;
+            padding-top: 140px;
+            padding-bottom: 80px;
+        }
+
+        .article-header { text-align: center; margin-bottom: 40px; }
+        .badge-cat { 
+            background: rgba(52, 211, 153, 0.1); color: var(--accent-green); /* Green Accent */
+            padding: 5px 15px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .article-title { font-size: 2.5rem; margin-top: 15px; margin-bottom: 20px; line-height: 1.3; }
+        .article-meta { color: var(--text-muted); font-size: 0.9rem; }
+        .article-meta span { margin: 0 10px; }
+
+        .article-image {
+            width: 100%; height: auto; border-radius: 16px; margin-bottom: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- TYPOGRAPHY CONTENT --- */
+        .content-body { font-size: 1.1rem; }
+        .content-body p { margin-bottom: 1.8rem; }
+        .content-body h2 { margin-top: 2.5rem; margin-bottom: 1rem; font-size: 1.8rem; }
+        
+        blockquote {
+            border-left: 4px solid var(--accent-green);
+            padding-left: 20px; margin: 30px 0;
+            font-style: italic; color: white; font-size: 1.2rem;
+        }
+
+        /* --- BOTTOM SECTION --- */
+        .post-footer {
+            margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .author-simple { display: flex; align-items: center; gap: 15px; }
+        .author-simple img { width: 50px; height: 50px; border-radius: 50%; }
+        
+        /* Font visibility fix */
+        .author-simple small { display: block; color: var(--text-muted); font-size: 0.85rem; margin-top: 2px; }
+        .share-simple span { color: var(--text-muted); font-size: 0.9rem; margin-right: 10px; }
+        
+        .read-next { margin-top: 80px; }
+        .card-next {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px; padding: 20px; transition: 0.3s; display: block;
+        }
+        .card-next:hover { border-color: var(--accent-green); transform: translateY(-5px); }
+        .card-next h6 { font-size: 1.1rem; margin-bottom: 5px; color: white; }
+        .card-next span { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* --- FOOTER STYLES --- */
+        footer { background-color: #020617; padding: 80px 0 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 1rem; }
+        footer h5 { color: var(--text-heading); margin-bottom: 20px; font-weight: 600; }
+        footer a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 12px; }
+        footer a:hover { color: var(--accent-red); transform: translateX(5px); }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 1.8rem; }
+            .article-container { padding-top: 120px; padding-left: 20px; padding-right: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="fas fa-layer-group brand-accent me-2"></i>
+                Maroon<span class="text-white fw-light ms-1">Digital</span>
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Services <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-5 mb-4 mb-lg-0">
+                                        <div class="menu-category-title">Core Services</div>
+                                        <a href="digital-marketing.html" class="mega-link">
+                                            <div class="mega-icon-box text-warning"><i class="fas fa-bullhorn"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Digital Marketing</h6>
+                                                <p>Strategi marketing terukur & profitabel.</p>
+                                            </div>
+                                        </a>
+                                        <a href="socialmedia-management.html" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-users"></i></div>
+                                            <div>
+                                                <h6>Social Media Management</h6>
+                                                <p>Konten kreatif untuk engagement tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="web-application-development.html" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-code"></i></div>
+                                            <div>
+                                                <h6>Web Application</h6>
+                                                <p>Sistem web custom untuk bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Growth</div>
+                                        <a href="jasa-pembuatan-landing-page.html" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-laptop-code"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Landing Page Service</h6>
+                                                <p>Halaman penawaran konversi tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="bisnis-consulting.html" class="mega-link">
+                                            <div class="mega-icon-box text-danger"><i class="fas fa-comments"></i></div>
+                                            <div>
+                                                <h6>Business Consulting</h6>
+                                                <p>Sesi konsultasi bedah bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 border-start border-secondary border-opacity-25 d-none d-lg-block">
+                                        <div class="best-seller-box">
+                                            <i class="fas fa-crown text-warning fa-2x mb-3"></i>
+                                            <h6 class="text-white small fw-bold">Best Seller</h6>
+                                            <p class="text-white-50 small" style="font-size: 0.8rem;">Paket Full Service
+                                                Pro paling banyak diminati.</p>
+                                            <a href="Index.html"
+                                                class="btn btn-sm btn-outline-warning rounded-pill mt-2">Lihat Paket</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="frameworkDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Marketing Framework <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="frameworkDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Fundamentals</div>
+                                        <a href="framework.html#fundamentals" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-book-open"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Overview</h6>
+                                                <p>50+ Marketing Framework.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Execution</div>
+                                        <a href="framework.html#copywriting" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-pen-nib"></i></div>
+                                            <div>
+                                                <h6>Copywriting</h6>
+                                                <p>Teknik Menulis Penawaran.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Advance</div>
+                                        <a href="framework.html#storytelling" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-theater-masks"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Storytelling</h6>
+                                                <p>Membangun Narasi Brand.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <a href="https://wa.me/62895639068080" target="_blank" class="btn btn-nav-login ms-lg-3">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="article-container">
+        
+        <header class="article-header">
+            <span class="badge-cat">BUSINESS</span>
+            <h1 class="article-title">Membangun SOP Tim WFA yang Efektif</h1>
+            <div class="article-meta">
+                <span>By Budi Santoso</span> &bull; <span>8 Jan 2025</span> &bull; <span>6 min read</span>
+            </div>
+        </header>
+
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=90" alt="Remote Work Management" class="article-image">
+
+        <div class="content-body">
+            <p>Sejak pandemi, Work From Anywhere (WFA) bukan lagi sekadar tren, melainkan standar baru. Namun, banyak perusahaan gagal menerapkan WFA karena ketiadaan sistem yang jelas. Produktivitas tim menurun bukan karena mereka malas, tapi karena kebingungan.</p>
+            <p>Kunci sukses tim remote adalah <strong>Standard Operating Procedure (SOP)</strong> yang adaptif, bukan sekadar memindahkan aturan kantor fisik ke ruang virtual.</p>
+
+            <h2>1. Ubah Fokus dari "Jam Kerja" ke "Hasil Kerja"</h2>
+            <p>Dalam WFA, memantau layar karyawan 8 jam sehari itu kuno dan merusak kepercayaan. Ganti absensi dengan <em>Key Performance Indicators (KPI)</em> harian atau mingguan. Jika target selesai dalam 4 jam, itu lebih baik daripada 8 jam duduk tapi tidak produktif.</p>
+
+            <h2>2. Tetapkan "Core Hours" untuk Komunikasi</h2>
+            <p>Fleksibilitas itu bagus, tapi komunikasi asinkron bisa memperlambat keputusan. Tetapkan jam inti (misal: 10.00 - 14.00 WIB) di mana semua tim wajib online untuk meeting dan respon cepat. Di luar jam itu, biarkan mereka bekerja fokus (deep work).</p>
+
+            <blockquote>
+                "Kebebasan tanpa aturan adalah kekacauan. SOP WFA bukan untuk mengekang, tapi memberikan struktur agar tim bisa bekerja dengan tenang."
+            </blockquote>
+
+            <h2>3. Dokumentasi adalah Segalanya</h2>
+            <p>Di kantor fisik, Anda bisa menepuk bahu teman untuk bertanya. Di WFA, hal ini mengganggu. Biasakan budaya menulis. Buat dokumentasi di Notion atau Google Docs untuk setiap proses kerja, sehingga tim tidak perlu bertanya hal yang sama berulang kali.</p>
+
+            <h2>4. Ritual Sosial Virtual</h2>
+            <p>Kesepian dan <em>burnout</em> adalah musuh WFA. Jadwalkan sesi non-kerja secara rutin, seperti "Virtual Coffee Break" atau sesi main game bareng setiap Jumat sore. Ini menjaga ikatan emosional tim tetap kuat meski terpisah jarak.</p>
+
+            <h2>Kesimpulan</h2>
+            <p>Membangun tim WFA yang solid membutuhkan kepercayaan dan sistem yang transparan. Mulailah menyusun SOP Anda hari ini, fokus pada output, dan jangan lupa memanusiakan interaksi digital Anda.</p>
+        </div>
+
+        <div class="post-footer">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="author-simple">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Budi">
+                    <div>
+                        <h6 class="text-white mb-0">Budi Santoso</h6>
+                        <small>Business Consultant</small>
+                    </div>
+                </div>
+                <div class="share-simple">
+                    <span>Share:</span>
+                    <a href="#" class="me-2"><i class="fab fa-whatsapp text-white"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-linkedin text-white"></i></a>
+                    <a href="#"><i class="fab fa-twitter text-white"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="read-next">
+            <h5 class="text-white mb-4">Artikel Lainnya</h5>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <a href="#" class="card-next">
+                        <h6>Cara Scale Up Tanpa Bakar Duit</h6>
+                        <span>Business &bull; 5 Nov 2024</span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="#" class="card-next">
+                        <h6>Algoritma TikTok Berubah Lagi?</h6>
+                        <span>Social Media &bull; 10 Jan 2025</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+ <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h5 class="text-white fw-bold"><i class="fas fa-layer-group text-danger me-2"></i>Maroon Digital</h5>
+                    <p style="color: #cbd5e1; font-size: 0.95rem;">Partner strategis pertumbuhan bisnis Anda. Kami mengkombinasikan data, kreativitas, dan teknologi.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="bisnis-consulting.html">Consulting</a></li>
+                        <li><a style="color: #ffffff;"href="digital-marketing.html">Ads Management</a></li>
+                        <li><a style="color: #ffffff;" href="web-application-development.html">Web Development</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Perusahaan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="about.html">Tentang Kami</a></li>
+                        <li><a style="color: #ffffff;" href="https://wa.me/62895639068080" target="_blank">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Hubungi Kami</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2"><i class="fas fa-envelope me-2 text-danger"></i> <span style="color: #cbd5e1;">info@maroondigital.com</span></li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i> <span style="color: #cbd5e1;">Jakarta Selatan, Indonesia</span></li>
+                    </ul>
+                    <div class="mt-4">
+                        <a href="https://www.instagram.com/" class="me-3 fs-5 text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" class="me-3 fs-5 text-white"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/" class="me-3 fs-5 text-white"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 pt-4 border-top border-secondary border-opacity-25">
+                <div class="col-md-6 text-center text-md-start"><p class="small mb-0">&copy; 2023 Maroon Digital. All rights reserved.</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

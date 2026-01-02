@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategi Email B2B - Maroon Digital</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- COLOR PALETTE --- */
+            --primary-bg: #0B1120;
+            --card-bg: #161F32;
+            
+            --accent-green: #34d399; /* Green for Business/Marketing */
+            --accent-red: #f87171;
+            --accent-maroon: #dc2626;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            
+            /* Text Colors */
+            --text-heading: #ffffff;
+            --text-body: #e2e8f0;
+            --text-muted: #94a3b8; /* Fixed High Contrast */
+            
+            --dropdown-bg: #111827;
+            --nav-link-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-body);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 { color: var(--text-heading); font-weight: 700; }
+        p, li { color: var(--text-body); }
+        
+        /* Force Muted Text to be Visible */
+        .text-muted { color: var(--text-muted) !important; }
+        
+        a { text-decoration: none; transition: 0.3s; color: inherit; }
+        
+        /* --- NAVBAR STYLES --- */
+        .navbar { background-color: rgba(11, 17, 32, 0.98); backdrop-filter: blur(16px); padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 1030; }
+        .navbar-brand { font-weight: 700; color: var(--text-heading) !important; font-size: 1.5rem; letter-spacing: -0.5px; }
+        .brand-accent { color: var(--accent-maroon); }
+        .navbar-nav .nav-link { color: var(--nav-link-color) !important; font-weight: 500; font-size: 0.95rem; padding: 0.8rem 1.2rem !important; transition: color 0.3s; display: flex; align-items: center; gap: 6px; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active, .navbar-nav .show>.nav-link { color: #ffffff !important; }
+        .dropdown-toggle::after { display: none; }
+        .nav-link i.fa-chevron-down { font-size: 0.75rem; transition: transform 0.3s ease; }
+        .nav-item.dropdown:hover .nav-link i.fa-chevron-down { transform: rotate(180deg); }
+        .btn-nav-login { color: var(--text-heading) !important; border: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s; margin-top: 10px; }
+        .btn-nav-login:hover { background-color: var(--text-heading); color: var(--primary-bg) !important; }
+        @media (min-width: 992px) { .btn-nav-login { margin-top: 0; } }
+        
+        /* MEGA MENU STYLE */
+        .dropdown-menu.mega-menu { background-color: var(--dropdown-bg); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid var(--accent-maroon); border-radius: 0 0 16px 16px; padding: 20px; margin-top: 0; }
+        @media (min-width: 992px) { 
+            .navbar-nav .nav-item { position: static; } 
+            .dropdown-menu.mega-menu { display: block; visibility: hidden; opacity: 0; transform: translateY(15px); transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); width: 100%; left: 0; right: 0; top: 90%; padding: 40px 0; box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.7); } 
+            .navbar-nav .nav-item.dropdown:hover .dropdown-menu { visibility: visible; opacity: 1; transform: translateY(0); } 
+        }
+        .mega-link { display: flex; align-items: start; padding: 16px; border-radius: 12px; text-decoration: none; color: var(--text-heading); transition: all 0.2s ease; } 
+        .mega-link:hover { background-color: rgba(255,255,255,0.03); transform: translateX(5px); } 
+        .mega-icon-box { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0; } 
+        .mega-link:hover .mega-icon-box { background: rgba(255,255,255,0.1); color: white; } 
+        .mega-link h6 { font-weight: 600; margin-bottom: 4px; font-size: 0.95rem; color: #f1f5f9; } 
+        .mega-link p { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0; line-height: 1.4; } 
+        .menu-category-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 700; margin-bottom: 15px; padding-left: 15px; } 
+        .best-seller-box { height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 1.5rem; border-radius: 1rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+
+        /* --- ARTICLE LAYOUT (SIMPLIFIED) --- */
+        .article-container {
+            max-width: 760px; /* Lebar optimal untuk membaca */
+            margin: 0 auto;
+            padding-top: 140px;
+            padding-bottom: 80px;
+        }
+
+        .article-header { text-align: center; margin-bottom: 40px; }
+        .badge-cat { 
+            background: rgba(52, 211, 153, 0.1); color: var(--accent-green); /* Green Accent */
+            padding: 5px 15px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .article-title { font-size: 2.5rem; margin-top: 15px; margin-bottom: 20px; line-height: 1.3; }
+        .article-meta { color: var(--text-muted); font-size: 0.9rem; }
+        .article-meta span { margin: 0 10px; }
+
+        .article-image {
+            width: 100%; height: auto; border-radius: 16px; margin-bottom: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- TYPOGRAPHY CONTENT --- */
+        .content-body { font-size: 1.1rem; }
+        .content-body p { margin-bottom: 1.8rem; }
+        .content-body h2 { margin-top: 2.5rem; margin-bottom: 1rem; font-size: 1.8rem; }
+        
+        blockquote {
+            border-left: 4px solid var(--accent-green);
+            padding-left: 20px; margin: 30px 0;
+            font-style: italic; color: white; font-size: 1.2rem;
+        }
+
+        /* --- BOTTOM SECTION --- */
+        .post-footer {
+            margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .author-simple { display: flex; align-items: center; gap: 15px; }
+        .author-simple img { width: 50px; height: 50px; border-radius: 50%; }
+        
+        /* Font visibility fix */
+        .author-simple small { display: block; color: var(--text-muted); font-size: 0.85rem; margin-top: 2px; }
+        .share-simple span { color: var(--text-muted); font-size: 0.9rem; margin-right: 10px; }
+        
+        .read-next { margin-top: 80px; }
+        .card-next {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px; padding: 20px; transition: 0.3s; display: block;
+        }
+        .card-next:hover { border-color: var(--accent-green); transform: translateY(-5px); }
+        .card-next h6 { font-size: 1.1rem; margin-bottom: 5px; color: white; }
+        .card-next span { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* --- FOOTER STYLES --- */
+        footer { background-color: #020617; padding: 80px 0 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 1rem; }
+        footer h5 { color: var(--text-heading); margin-bottom: 20px; font-weight: 600; }
+        footer a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 12px; }
+        footer a:hover { color: var(--accent-red); transform: translateX(5px); }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 1.8rem; }
+            .article-container { padding-top: 120px; padding-left: 20px; padding-right: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="fas fa-layer-group brand-accent me-2"></i>
+                Maroon<span class="text-white fw-light ms-1">Digital</span>
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Services <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-5 mb-4 mb-lg-0">
+                                        <div class="menu-category-title">Core Services</div>
+                                        <a href="digital-marketing.html" class="mega-link">
+                                            <div class="mega-icon-box text-warning"><i class="fas fa-bullhorn"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Digital Marketing</h6>
+                                                <p>Strategi marketing terukur & profitabel.</p>
+                                            </div>
+                                        </a>
+                                        <a href="socialmedia-management.html" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-users"></i></div>
+                                            <div>
+                                                <h6>Social Media Management</h6>
+                                                <p>Konten kreatif untuk engagement tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="web-application-development.html" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-code"></i></div>
+                                            <div>
+                                                <h6>Web Application</h6>
+                                                <p>Sistem web custom untuk bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Growth</div>
+                                        <a href="jasa-pembuatan-landing-page.html" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-laptop-code"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Landing Page Service</h6>
+                                                <p>Halaman penawaran konversi tinggi.</p>
+                                            </div>
+                                        </a>
+                                        <a href="bisnis-consulting.html" class="mega-link">
+                                            <div class="mega-icon-box text-danger"><i class="fas fa-comments"></i></div>
+                                            <div>
+                                                <h6>Business Consulting</h6>
+                                                <p>Sesi konsultasi bedah bisnis.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 border-start border-secondary border-opacity-25 d-none d-lg-block">
+                                        <div class="best-seller-box">
+                                            <i class="fas fa-crown text-warning fa-2x mb-3"></i>
+                                            <h6 class="text-white small fw-bold">Best Seller</h6>
+                                            <p class="text-white-50 small" style="font-size: 0.8rem;">Paket Full Service
+                                                Pro paling banyak diminati.</p>
+                                            <a href="Index.html"
+                                                class="btn btn-sm btn-outline-warning rounded-pill mt-2">Lihat Paket</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="frameworkDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Marketing Framework <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" aria-labelledby="frameworkDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Fundamentals</div>
+                                        <a href="framework.html#fundamentals" class="mega-link">
+                                            <div class="mega-icon-box text-primary"><i class="fas fa-book-open"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Overview</h6>
+                                                <p>50+ Marketing Framework.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Execution</div>
+                                        <a href="framework.html#copywriting" class="mega-link">
+                                            <div class="mega-icon-box text-success"><i class="fas fa-pen-nib"></i></div>
+                                            <div>
+                                                <h6>Copywriting</h6>
+                                                <p>Teknik Menulis Penawaran.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="menu-category-title">Advance</div>
+                                        <a href="framework.html#storytelling" class="mega-link">
+                                            <div class="mega-icon-box text-info"><i class="fas fa-theater-masks"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Storytelling</h6>
+                                                <p>Membangun Narasi Brand.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <a href="https://wa.me/62895639068080" target="_blank" class="btn btn-nav-login ms-lg-3">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="article-container">
+        
+        <header class="article-header">
+            <span class="badge-cat">MARKETING</span>
+            <h1 class="article-title">Strategi Email B2B: Cara Menulis Subject Line yang Dibuka CEO</h1>
+            <div class="article-meta">
+                <span>By Diana Rose</span> &bull; <span>2 Jan 2025</span> &bull; <span>5 min read</span>
+            </div>
+        </header>
+
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=90" alt="Email Marketing" class="article-image">
+
+        <div class="content-body">
+            <p>Banyak orang bilang email marketing sudah mati. Faktanya, untuk pasar B2B (Business to Business), email masih menjadi raja dengan ROI tertinggi. Namun, tantangannya adalah bagaimana agar email Anda tidak langsung masuk tong sampah atau folder spam.</p>
+            <p>Kunci utama dari keberhasilan cold email adalah <strong>Subject Line</strong>. CEO atau decision maker menerima ratusan email per hari. Anda hanya punya waktu 2 detik untuk menarik perhatian mereka.</p>
+
+            <h2>1. Hindari Kata-Kata "Salesy"</h2>
+            <p>Jangan gunakan kata seperti "Diskon", "Gratis", "Penawaran Spesial", atau "Terbaik". Kata-kata ini adalah pemicu filter spam dan membuat email Anda terlihat murahan. Gunakan bahasa yang profesional dan to the point.</p>
+
+            <h2>2. Personalisasi adalah Kunci</h2>
+            <p>Subject line generik seperti "Penawaran Kerjasama" pasti diabaikan. Cobalah sebutkan nama perusahaan mereka atau masalah spesifik yang sedang mereka hadapi.</p>
+            <p><em>Contoh Buruk:</em> Jasa SEO Murah untuk Bisnis Anda</p>
+            <p><em>Contoh Baik:</em> Ide untuk menaikkan trafik website Maroon Digital</p>
+
+            <blockquote>
+                "Email B2B bukan tentang menjual produk, tapi tentang memulai percakapan. Jangan langsung jualan di email pertama."
+            </blockquote>
+
+            <h2>3. Buat Penasaran, Tapi Jangan Clickbait</h2>
+            <p>Clickbait yang menipu akan menghancurkan reputasi Anda. Buat mereka penasaran dengan data atau pertanyaan yang relevan dengan industri mereka.</p>
+            <ul>
+                <li>"Pertanyaan tentang strategi Q1 Anda"</li>
+                <li>"Kami menemukan error di checkout page Anda"</li>
+                <li>"3 kompetitor Anda sudah melakukan ini"</li>
+            </ul>
+
+            <h2>4. Jaga Tetap Pendek (Mobile Friendly)</h2>
+            <p>Lebih dari 60% email dibuka di HP. Jika subject line Anda terlalu panjang, itu akan terpotong. Usahakan di bawah 60 karakter atau sekitar 5-7 kata.</p>
+
+            <h2>Kesimpulan</h2>
+            <p>Menulis email ke CEO membutuhkan empati. Hargai waktu mereka dengan memberikan nilai sejak baris pertama. Jangan menyerah jika email pertama tidak dibalas, lakukan <em>follow-up</em> dengan sopan dan berikan value tambahan.</p>
+        </div>
+
+        <div class="post-footer">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="author-simple">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Diana">
+                    <div>
+                        <h6 class="text-white mb-0">Diana Rose</h6>
+                        <small>Marketing Specialist</small>
+                    </div>
+                </div>
+                <div class="share-simple">
+                    <span>Share:</span>
+                    <a href="#" class="me-2"><i class="fab fa-whatsapp text-white"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-linkedin text-white"></i></a>
+                    <a href="#"><i class="fab fa-twitter text-white"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="read-next">
+            <h5 class="text-white mb-4">Artikel Lainnya</h5>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <a href="#" class="card-next">
+                        <h6>Landing Page Sepi Konversi?</h6>
+                        <span>Web Dev &bull; 5 Jan 2025</span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="#" class="card-next">
+                        <h6>Membangun Brand Identity yang Mahal</h6>
+                        <span>Branding &bull; 28 Dec 2024</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+ <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h5 class="text-white fw-bold"><i class="fas fa-layer-group text-danger me-2"></i>Maroon Digital</h5>
+                    <p style="color: #cbd5e1; font-size: 0.95rem;">Partner strategis pertumbuhan bisnis Anda. Kami mengkombinasikan data, kreativitas, dan teknologi.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="bisnis-consulting.html">Consulting</a></li>
+                        <li><a style="color: #ffffff;"href="digital-marketing.html">Ads Management</a></li>
+                        <li><a style="color: #ffffff;" href="web-application-development.html">Web Development</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5>Perusahaan</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: #ffffff;" href="about.html">Tentang Kami</a></li>
+                        <li><a style="color: #ffffff;" href="https://wa.me/62895639068080" target="_blank">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Hubungi Kami</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2"><i class="fas fa-envelope me-2 text-danger"></i> <span style="color: #cbd5e1;">info@maroondigital.com</span></li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i> <span style="color: #cbd5e1;">Jakarta Selatan, Indonesia</span></li>
+                    </ul>
+                    <div class="mt-4">
+                        <a href="https://www.instagram.com/" class="me-3 fs-5 text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" class="me-3 fs-5 text-white"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/" class="me-3 fs-5 text-white"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 pt-4 border-top border-secondary border-opacity-25">
+                <div class="col-md-6 text-center text-md-start"><p class="small mb-0">&copy; 2023 Maroon Digital. All rights reserved.</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
